@@ -2,6 +2,7 @@ package rut.miit.testingsystem.auth;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import rut.miit.testingsystem.auth.user.dto.request.UserDTORegisterRequest;
 
 @RestController
 public class AuthController {
@@ -10,9 +11,9 @@ public class AuthController {
         this.service=service;
     }
 
-    @PostMapping("/")
+    @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
-    public void registration(@RequestBody RegisterDTORequest registerDTORequest) {
-        service.register(registerDTORequest);
+    public void registration(@RequestBody UserDTORegisterRequest userDTORegisterRequest) {
+        service.register(userDTORegisterRequest);
     }
 }
