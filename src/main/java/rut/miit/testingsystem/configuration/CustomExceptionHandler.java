@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import rut.miit.testingsystem.exception.UserAlreadyExistsException;
+import rut.miit.testingsystem.exception.UserNotFoundException;
 import rut.miit.testingsystem.exception.StudentGroupNotFoundException;
 import rut.miit.testingsystem.exception.StudentNotFoundException;
 import rut.miit.testingsystem.exception.SubjectNotFoundException;
@@ -76,9 +76,9 @@ public class CustomExceptionHandler {
         return body;
     }
 
-    @ExceptionHandler(UserAlreadyExistsException.class)
+    @ExceptionHandler(UserNotFoundException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public Map<String, Object> handleUserAlreadyExists(UserAlreadyExistsException e) {
+    public Map<String, Object> handleUserAlreadyExists(UserNotFoundException e) {
         Map<String, Object> body = new HashMap<>(2);
         body.put("timestamp", LocalDateTime.now());
         body.put("message", "User already exists");

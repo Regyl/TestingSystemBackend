@@ -2,10 +2,10 @@ package rut.miit.testingsystem;
 
 import java.time.LocalDateTime;
 
-public class ObjectDTOCreateResponse {
+public abstract class ObjectDTOCreateResponse {
     private LocalDateTime timestamp;
 
-    public ObjectDTOCreateResponse() {
+    protected ObjectDTOCreateResponse() {
         this.timestamp=LocalDateTime.now();
     }
 
