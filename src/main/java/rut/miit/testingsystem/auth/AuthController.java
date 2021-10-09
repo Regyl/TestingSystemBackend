@@ -14,6 +14,6 @@ public class AuthController {
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
     public void registration(@RequestBody UserDTORegisterRequest userDTORegisterRequest) {
-        service.register(userDTORegisterRequest);
+        service.saveUser(userDTORegisterRequest);
     }
 }

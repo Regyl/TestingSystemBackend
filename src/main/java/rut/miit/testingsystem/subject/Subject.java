@@ -1,5 +1,7 @@
 package rut.miit.testingsystem.subject;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import rut.miit.testingsystem.subject.dto.request.SubjectDTOCreateRequest;
 
 import javax.persistence.*;
@@ -8,6 +10,8 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "subject")
+@Data
+@NoArgsConstructor
 public class Subject {
     @Id
     @GeneratedValue
@@ -19,25 +23,7 @@ public class Subject {
     @NotNull
     private String name;
 
-    public Subject() {}
-
     public Subject(SubjectDTOCreateRequest createRequest) {
         this.name=createRequest.getName();
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
     }
 }

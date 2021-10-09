@@ -6,10 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import rut.miit.testingsystem.exception.UserAlreadyExistsException;
-import rut.miit.testingsystem.exception.StudentGroupNotFoundException;
-import rut.miit.testingsystem.exception.StudentNotFoundException;
-import rut.miit.testingsystem.exception.SubjectNotFoundException;
+import rut.miit.testingsystem.exception.*;
 
 import java.sql.SQLException;
 import java.time.LocalDateTime;
@@ -84,6 +81,8 @@ public class CustomExceptionHandler {
         body.put("message", "User already exists");
         return body;
     }
+
+
 
 
 }
