@@ -1,7 +1,5 @@
 package rut.miit.testingsystem;
 
-import org.springframework.http.ResponseEntity;
-
 import java.util.List;
 import java.util.UUID;
 
