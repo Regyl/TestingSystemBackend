@@ -38,7 +38,7 @@ public class User implements UserDetails {
     @Column(columnDefinition = "BOOLEAN default true")
     private Boolean credentialsNonExpired = true;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER) //Если ставить lazy падает с LazyInitializationException
     private Set<Role> authorities = new HashSet<>(3);
 
     public User(UserDTORegisterRequest userDTORegisterRequest) {

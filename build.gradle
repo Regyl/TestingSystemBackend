@@ -28,6 +28,8 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.20'
     testImplementation 'org.springframework.boot:spring-boot-starter-test:2.5.5'
     testImplementation 'org.springframework.security:spring-security-test:5.5.1'
+
+    implementation 'org.springdoc:springdoc-openapi-ui:1.5.10'
 }
 
 test {

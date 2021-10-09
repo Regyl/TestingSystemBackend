@@ -5,7 +5,7 @@ import rut.miit.testingsystem.IController;
 import java.util.List;
 import java.util.UUID;
 
-public interface ITestController extends IController {
+public interface  ITestController extends IController {
     @Override
     public List<Test> findAll();
 

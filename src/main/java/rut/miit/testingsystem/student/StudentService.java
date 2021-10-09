@@ -1,9 +1,11 @@
 package rut.miit.testingsystem.student;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import rut.miit.testingsystem.student.dto.request.StudentDTOGroupUpdateRequest;
 import rut.miit.testingsystem.exception.StudentNotFoundException;
 import rut.miit.testingsystem.student.dto.request.StudentDTOCreateRequest;
+import rut.miit.testingsystem.student.group.StudentGroupService;
 
 import java.util.List;
 import java.util.UUID;
@@ -13,6 +15,11 @@ public class StudentService {
     StudentRepository repository;
     public StudentService(StudentRepository repository) {
         this.repository=repository;
+    }
+    StudentGroupService groupService;
+    @Autowired
+    public void setRepository(StudentRepository repository) {
+        this.repository = repository;
     }
 
     public List<Student> findAll() {
@@ -29,13 +36,13 @@ public class StudentService {
 
     public void updateStatus(UUID studentId) {
         Student student = findById(studentId);
-        student.setAgreed(true);
+        student.setIsAgreed(true);
         repository.save(student);
     }
 
     public void updateGroup(StudentDTOGroupUpdateRequest updateRequest) { //TODO: move to repository @Query
         List<Student> students = repository.findAllById(updateRequest.getStudentIds());
-        students.forEach(student -> student.setGroupId(updateRequest.getGroupId()));
+        students.forEach(student -> student.setGroupId(groupService.findById(updateRequest.getGroupId())));
         repository.saveAll(students);
     }
 
