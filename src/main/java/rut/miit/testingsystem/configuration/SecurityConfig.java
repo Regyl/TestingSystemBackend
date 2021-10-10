@@ -67,7 +67,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
                 .antMatchers("/register", "/login").permitAll()
                 .antMatchers("/students**", "/subjects**").hasRole(Authorities.Administrator.toString())
                 .antMatchers("/questions**", "/answers**", "/tests**").hasRole(Authorities.Professor.toString())
-//                .antMatchers("/tests/*", "/questions/*", "/answers/*").hasRole(Authorities.Student.toString()) //TODO: read-only
+                .antMatchers("**/readOnly**").hasRole(Authorities.Student.toString())
                 .and().formLogin().loginProcessingUrl("/sign-in")
                 .successHandler(successHandler()).failureHandler(failureHandler());
     }
@@ -83,7 +83,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
     }
 
     @Override
-    public void addFormatters(FormatterRegistry registry) { //Formatter for LocalDate in @RequestParam
+    public void addFormatters(FormatterRegistry registry) {
         DateTimeFormatterRegistrar registrar = new DateTimeFormatterRegistrar();
         registrar.setUseIsoFormat(true);
         registrar.registerFormatters(registry);

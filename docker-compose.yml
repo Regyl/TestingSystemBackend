@@ -1,0 +1,21 @@
+version: '3.2'
+services:
+  postgres:
+    restart: always
+    container_name: habr-pg-13.3
+    image: postgres:13.3
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_PASSWORD=pgpwd4habr
+      - POSTGRES_USER=habrpguser
+      - POSTGRES_DB=habrdb
+  # APP**
+  web:
+    build: .
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/habrdb
+    expose:
+      - 8080
+    ports:
+      - 8080:8080

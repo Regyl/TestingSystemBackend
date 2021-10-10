@@ -17,7 +17,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
         Iterator<Role> authoritiesIterator = (Iterator<Role>) SecurityContextHolder.getContext().getAuthentication().getAuthorities().iterator();
-        response.getWriter().write(authoritiesIterator.next().getAuthority()); //TODO: CHECK IT PLEASE
+        response.getWriter().write(authoritiesIterator.next().getAuthority());
         response.getWriter().flush();
     }
 }
