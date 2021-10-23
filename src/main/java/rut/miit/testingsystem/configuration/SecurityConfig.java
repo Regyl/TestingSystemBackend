@@ -23,6 +23,7 @@ import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.cors.CorsConfiguration;
@@ -69,17 +70,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
                 .antMatchers("/questions**", "/answers**", "/tests**").hasRole(Authorities.Professor.toString())
                 .antMatchers("**/readOnly**").hasRole(Authorities.Student.toString())
                 .and().formLogin().loginProcessingUrl("/sign-in")
-                .successHandler(successHandler()).failureHandler(failureHandler());
+                .successHandler(authenticationSuccessHandler()).failureHandler(authenticationFailureHandler())
+                .and().logout().logoutUrl("/logout").logoutSuccessHandler(logoutSuccessHandler()).deleteCookies("JSESSIONID");
     }
 
     @Bean
-    public AuthenticationSuccessHandler successHandler() {
+    public AuthenticationSuccessHandler authenticationSuccessHandler() {
         return new CustomAuthenticationSuccessHandler();
     }
 
     @Bean
-    public AuthenticationFailureHandler failureHandler() {
+    public AuthenticationFailureHandler authenticationFailureHandler() {
         return new CustomAuthenticationFailureHandler();
+    }
+
+    @Bean
+    public LogoutSuccessHandler logoutSuccessHandler() {
+        return new CustomLogoutSuccessHandler();
     }
 
     @Override
