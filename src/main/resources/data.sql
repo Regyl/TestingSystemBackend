@@ -1,3 +1,3 @@
-insert into roles values ('Professor');
-insert into roles values ('Administrator');
-insert into roles values ('Student');
+INSERT INTO roles VALUES ('Professor');
+INSERT INTO roles VALUES ('Administrator');
+INSERT INTO roles VALUES ('Student');
