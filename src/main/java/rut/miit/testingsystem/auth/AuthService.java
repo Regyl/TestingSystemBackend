@@ -2,16 +2,14 @@ package rut.miit.testingsystem.auth;
 
 import org.jboss.logging.Logger;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsPasswordService;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import rut.miit.testingsystem.auth.authority.Role;
 import rut.miit.testingsystem.auth.authority.RoleRepository;
 import rut.miit.testingsystem.auth.user.User;
 import rut.miit.testingsystem.auth.user.UserRepository;
 import rut.miit.testingsystem.auth.user.dto.request.UserDTORegisterRequest;
 import rut.miit.testingsystem.exception.UserAlreadyExistsException;
-import rut.miit.testingsystem.exception.UserNotFoundException;
 
 @Service
 public class AuthService implements UserDetailsService {
@@ -26,7 +24,7 @@ public class AuthService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) {
-        return userRepository.findByUsername(username).orElseThrow(UserNotFoundException::new);
+        return userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User with name " + username + " not found!"));
     }
 
     public boolean isExists(String username) {
