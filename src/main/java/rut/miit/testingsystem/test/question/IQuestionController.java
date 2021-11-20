@@ -1,14 +1,17 @@
 package rut.miit.testingsystem.test.question;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import rut.miit.testingsystem.IController;
 
 import java.util.List;
 import java.util.UUID;
 
+@Tag(name = "Question")
+
 public interface IQuestionController extends IController {
     @Override
-    public List<Question> findAll();
+    List<Question> findAll();
 
     @Override
-    public Question findById(UUID id);
+    Question findById(UUID id);
 }
