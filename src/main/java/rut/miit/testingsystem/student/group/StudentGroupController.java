@@ -26,19 +26,18 @@ public class StudentGroupController implements IStudentGroupController {
     }
 
     @GetMapping("/")
-    @ResponseStatus(HttpStatus.OK)
     public List<StudentGroup> findAll() {
         return service.findAll();
     }
 
     @GetMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
+    
     public StudentGroup findById(@PathVariable UUID id) {
         return service.findById(id);
     }
 
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
+    
     public void deleteById(@PathVariable UUID id) {
         service.deleteById(id);
     }

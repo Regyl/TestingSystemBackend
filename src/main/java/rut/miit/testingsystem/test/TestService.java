@@ -3,7 +3,6 @@ package rut.miit.testingsystem.test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import rut.miit.testingsystem.exception.TestNotFoundException;
-import rut.miit.testingsystem.subject.SubjectRepository;
 import rut.miit.testingsystem.subject.SubjectService;
 import rut.miit.testingsystem.test.dto.request.TestDTOCreateRequest;
 

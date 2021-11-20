@@ -2,9 +2,9 @@ package rut.miit.testingsystem.student;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import rut.miit.testingsystem.student.dto.request.StudentDTOGroupUpdateRequest;
 import rut.miit.testingsystem.exception.StudentNotFoundException;
 import rut.miit.testingsystem.student.dto.request.StudentDTOCreateRequest;
+import rut.miit.testingsystem.student.dto.request.StudentDTOGroupUpdateRequest;
 import rut.miit.testingsystem.student.group.StudentGroupService;
 
 import java.util.List;

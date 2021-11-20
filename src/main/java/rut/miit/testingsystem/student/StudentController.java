@@ -1,5 +1,6 @@
 package rut.miit.testingsystem.student;
 
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,24 +15,23 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/students")
 public class StudentController implements IStudentController {
-    StudentService service;
+    private final StudentService service;
     public StudentController(StudentService service) {
         this.service=service;
     }
 
     @GetMapping("/")
-    @ResponseStatus(HttpStatus.OK)
     public List<Student> findAll() {
         return service.findAll();
     }
 
     @GetMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
     public Student findById(@PathVariable UUID id) {
         return service.findById(id);
     }
 
     @PostMapping("/")
+    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<StudentDTOCreateResponse> create(@RequestBody @Valid StudentDTOCreateRequest createRequest) {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
@@ -39,24 +39,24 @@ public class StudentController implements IStudentController {
     }
 
     @PutMapping("/")
-    @ResponseStatus(HttpStatus.OK)
+    @Operation(summary = "Update user info after registration")
     public void postCreate(@RequestParam UUID studentId) {
         service.updateStatus(studentId);
     }
 
-    @GetMapping("/withoutGroup")
+    @GetMapping("/emptygroup")
+    @Operation(summary = "Returns all students without group")
     public List<Student> findStudentsWithoutGroup() {
         return service.findByGroupIdIsNull();
     }
 
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
     public void deleteById(@PathVariable UUID id) {
         service.deleteById(id);
     }
 
-    @PutMapping("/addGroup")
-    @ResponseStatus(HttpStatus.OK)
+    @PutMapping("/updategroup")
+    @Operation(summary = "Add to student any group")
     public void updateStudentsGroup(@RequestBody @Valid StudentDTOGroupUpdateRequest groupUpdateRequest) {
         service.updateGroup(groupUpdateRequest);
     }

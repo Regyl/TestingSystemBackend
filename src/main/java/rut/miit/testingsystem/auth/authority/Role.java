@@ -2,7 +2,6 @@ package rut.miit.testingsystem.auth.authority;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.security.core.GrantedAuthority;
 import rut.miit.testingsystem.auth.user.User;
 import rut.miit.testingsystem.auth.user.dto.request.UserDTORegisterRequest;
