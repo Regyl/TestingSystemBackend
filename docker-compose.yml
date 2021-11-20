@@ -7,17 +7,18 @@ services:
       context: .
     container_name: app
     depends_on:
-      - TestingSystemDB
+      - db
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/testingsystem
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=SomeUselessPassword02
+      - SERVER_PORT=8090
     ports:
-      - '8080:8080'
+      - '8090:8090'
 
-  TestingSystemDB:
-    image: 'postgres:13.3'
-    container_name: TestingSystemDB
+  db:
+    image: 'postgres:13.1-alpine'
+    container_name: db
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=SomeUselessPassword02
