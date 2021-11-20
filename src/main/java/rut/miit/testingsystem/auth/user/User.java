@@ -2,10 +2,8 @@ package rut.miit.testingsystem.auth.user;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import rut.miit.testingsystem.auth.authority.Role;
 import rut.miit.testingsystem.auth.user.dto.request.UserDTORegisterRequest;
 
