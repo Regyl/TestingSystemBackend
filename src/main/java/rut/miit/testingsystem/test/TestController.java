@@ -13,7 +13,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/tests")
 public class TestController implements ITestController {
-    final TestService service;
+    private final TestService service;
     public TestController(TestService service) {
         this.service=service;
     }
