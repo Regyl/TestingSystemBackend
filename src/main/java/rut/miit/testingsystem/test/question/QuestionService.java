@@ -11,7 +11,7 @@ import java.util.UUID;
 
 @Service
 public class QuestionService {
-    final QuestionRepository repository;
+    private final QuestionRepository repository;
     public QuestionService(QuestionRepository repository) {
         this.repository=repository;
     }
