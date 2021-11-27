@@ -36,6 +36,7 @@ public class TestController implements ITestController {
     }
 
     @PostMapping("/")
+    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<TestDTOCreateResponse> create(@RequestBody @Valid TestDTOCreateRequest createRequest) {
         return ResponseEntity
                 .status(HttpStatus.CREATED)

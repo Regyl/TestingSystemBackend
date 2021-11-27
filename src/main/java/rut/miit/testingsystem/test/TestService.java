@@ -25,7 +25,7 @@ public class TestService {
     }
 
     public List<Test> findAllBySubject(UUID subjectId) {
-        return repository.findAllBySubjectId(subjectId);
+        return repository.findAllBySubjectIdId(subjectId);
     }
 
     public List<Test> findAll() {
