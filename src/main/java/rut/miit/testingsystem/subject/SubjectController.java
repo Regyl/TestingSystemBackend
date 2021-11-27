@@ -4,28 +4,42 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rut.miit.testingsystem.subject.dto.request.SubjectDTOCreateRequest;
-import rut.miit.testingsystem.subject.dto.response.SubjectDTOCreateResponse;
+import rut.miit.testingsystem.subject.dto.response.FacultyDtoResponse;
+import rut.miit.testingsystem.subject.dto.response.SubjectDTOResponse;
+import rut.miit.testingsystem.subject.faculty.Faculty;
 
 import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/subjects")
 public class SubjectController implements ISubjectController {
-    final SubjectService service;
+    private final SubjectService service;
+
     public SubjectController(SubjectService service) {
         this.service=service;
     }
 
     @GetMapping("/")
-    public List<Subject> findAll() {
-        return service.findAll();
+    public List<SubjectDTOResponse> findAll() {
+        return service.findAll().stream()
+                .map(SubjectDTOResponse::new)
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
-    public Subject findById(@PathVariable UUID id) {
-        return service.findById(id);
+    public SubjectDTOResponse findById(@PathVariable UUID id) {
+        Subject subject = service.findById(id);
+        return new SubjectDTOResponse(subject);
+    }
+
+    @GetMapping("/faculties")
+    public List<SubjectDTOResponse> findByFaculty(@RequestParam Faculty faculty) {
+        return service.findByFaculty(faculty).stream()
+                .map(SubjectDTOResponse::new)
+                .collect(Collectors.toList());
     }
 
     @DeleteMapping("/{id}")
@@ -34,9 +48,16 @@ public class SubjectController implements ISubjectController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<SubjectDTOCreateResponse> create(@RequestBody @Valid SubjectDTOCreateRequest createRequest) {
+    public ResponseEntity<SubjectDTOResponse> create(@RequestBody @Valid SubjectDTOCreateRequest createRequest) {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(new SubjectDTOCreateResponse(service.create(createRequest)));
+                .body(new SubjectDTOResponse(service.create(createRequest)));
+    }
+
+    @GetMapping("/faculties/")
+    public List<FacultyDtoResponse> getFaculties() {
+        return Faculty.stream().
+                map(FacultyDtoResponse::of)
+                .collect(Collectors.toList());
     }
 }
