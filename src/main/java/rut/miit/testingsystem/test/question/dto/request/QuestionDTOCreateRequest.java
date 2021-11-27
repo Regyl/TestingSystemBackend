@@ -15,6 +15,6 @@ public class QuestionDTOCreateRequest {
 
     private String additionalInfo;
 
-    @NotEmpty
+    @NotNull
     private UUID testId;
 }
