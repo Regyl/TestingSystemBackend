@@ -1,8 +1,12 @@
 package rut.miit.testingsystem.test.answer.dto.request;
 
+import lombok.Data;
+
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
+@Data
 public class AnswerDTOCreateRequest {
     @NotNull
     private UUID questionId;
@@ -10,21 +14,6 @@ public class AnswerDTOCreateRequest {
     @NotNull
     private Boolean isCorrect;
 
-    public AnswerDTOCreateRequest() {}
-
-    public Boolean getCorrect() {
-        return isCorrect;
-    }
-
-    public void setCorrect(Boolean correct) {
-        isCorrect = correct;
-    }
-
-    public UUID getQuestionId() {
-        return questionId;
-    }
-
-    public void setQuestionId(UUID questionId) {
-        this.questionId = questionId;
-    }
+    @NotEmpty
+    private String text;
 }

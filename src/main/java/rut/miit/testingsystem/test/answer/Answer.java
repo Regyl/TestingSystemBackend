@@ -15,7 +15,6 @@ import java.util.UUID;
 public class Answer {
     @Id
     @GeneratedValue
-    @NotNull
     private UUID id;
 
     @NotNull
@@ -26,9 +25,14 @@ public class Answer {
     @NotNull
     private Boolean isCorrect;
 
+    @NotNull
+    @Column(columnDefinition = "TEXT")
+    private String text;
+
 
     public Answer(AnswerDTOCreateRequest createRequest, Question question) {
         this.question=question;
-        this.isCorrect=createRequest.getCorrect();
+        this.isCorrect=createRequest.getIsCorrect();
+        this.text=createRequest.getText();
     }
 }
