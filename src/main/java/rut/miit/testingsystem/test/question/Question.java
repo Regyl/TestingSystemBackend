@@ -16,14 +16,13 @@ import java.util.UUID;
 public class Question {
     @Id
     @GeneratedValue
-    @NotNull
     private UUID id;
 
     @NotNull
-    @Lob //important: for type text
+    @Column(columnDefinition = "TEXT")
     private String text;
 
-    @Lob
+    @Column(columnDefinition = "TEXT")
     private String additionalInfo;
 
     @ManyToOne
