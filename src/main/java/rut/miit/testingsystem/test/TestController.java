@@ -13,7 +13,9 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/tests")
 public class TestController implements ITestController {
+
     private final TestService service;
+
     public TestController(TestService service) {
         this.service=service;
     }
@@ -38,5 +40,10 @@ public class TestController implements ITestController {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(new TestDTOCreateResponse(service.create(createRequest)));
+    }
+
+    @GetMapping("/subject")
+    public List<Test> findAllBySubject(@RequestParam UUID id) {
+        return service.findAllBySubject(id);
     }
 }

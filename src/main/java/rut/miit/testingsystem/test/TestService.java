@@ -11,16 +11,22 @@ import java.util.UUID;
 
 @Service
 public class TestService {
-    final TestRepository repository;
+    private final TestRepository repository;
+
     public TestService(TestRepository repository) {
         this.repository=repository;
     }
-    SubjectService subjectService;
+
+    private SubjectService subjectService;
+
     @Autowired
     public void setSubjectService(SubjectService subjectService) {
         this.subjectService = subjectService;
     }
 
+    public List<Test> findAllBySubject(UUID subjectId) {
+        return repository.findAllBySubjectId(subjectId);
+    }
 
     public List<Test> findAll() {
         return repository.findAll();
