@@ -36,4 +36,8 @@ public class QuestionService {
     public Question create(QuestionDTOCreateRequest createRequest) {
         return repository.save(new Question(createRequest, testService.findById(createRequest.getTestId())));
     }
+
+    public List<Question> findAllBYTest(UUID id) {
+        return repository.findAllByTestId(id);
+    }
 }

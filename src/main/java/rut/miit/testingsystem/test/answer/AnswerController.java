@@ -13,7 +13,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/answers")
 public class AnswerController implements IAnswerController {
-    final AnswerService service;
+    private final AnswerService service;
     public AnswerController(AnswerService service) {
         this.service=service;
     }
@@ -38,5 +38,10 @@ public class AnswerController implements IAnswerController {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(new AnswerDTOCreateResponse(service.create(createRequest)));
+    }
+
+    @GetMapping("/question")
+    public List<Answer> findByQuestion(@RequestParam UUID id) {
+        return service.findByQuestion(id);
     }
 }

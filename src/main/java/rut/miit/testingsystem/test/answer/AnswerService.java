@@ -11,7 +11,7 @@ import java.util.UUID;
 
 @Service
 public class AnswerService {
-    final AnswerRepository repository;
+    private final AnswerRepository repository;
     public AnswerService(AnswerRepository repository) {
         this.repository=repository;
     }
@@ -35,5 +35,9 @@ public class AnswerService {
 
     public Answer create(AnswerDTOCreateRequest createRequest) {
         return repository.save(new Answer(createRequest, questionService.findById(createRequest.getQuestionId())));
+    }
+
+    public List<Answer> findByQuestion(UUID id) {
+        return repository.findAllByQuestionId(id);
     }
 }
