@@ -1,6 +1,7 @@
 package rut.miit.testingsystem.test;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import rut.miit.testingsystem.subject.Subject;
 import rut.miit.testingsystem.test.dto.request.TestDto;
@@ -18,6 +19,7 @@ import java.util.UUID;
 @Table(name = "test")
 @Data
 @NoArgsConstructor
+@EqualsAndHashCode(exclude = "questions")
 public class Test {
     @Id
     @GeneratedValue

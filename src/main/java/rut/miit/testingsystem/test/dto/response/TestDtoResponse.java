@@ -17,7 +17,7 @@ import java.util.Set;
 import java.util.UUID;
 
 @Data
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(exclude = "questions")
 public class TestDtoResponse extends ObjectDTOCreateResponse {
 
     private UUID id;

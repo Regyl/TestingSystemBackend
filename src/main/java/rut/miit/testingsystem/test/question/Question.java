@@ -1,6 +1,7 @@
 package rut.miit.testingsystem.test.question;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import rut.miit.testingsystem.test.Test;
 import rut.miit.testingsystem.test.answer.Answer;
@@ -16,6 +17,7 @@ import java.util.UUID;
 @Table(name = "question")
 @Data
 @NoArgsConstructor
+@EqualsAndHashCode(exclude = "answers")
 public class Question {
     @Id
     @GeneratedValue

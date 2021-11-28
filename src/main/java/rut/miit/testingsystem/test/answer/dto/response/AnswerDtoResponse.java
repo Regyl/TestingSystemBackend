@@ -10,7 +10,7 @@ import java.util.UUID;
 public class AnswerDtoResponse extends ObjectDTOCreateResponse {
     private UUID id;
 
-    private QuestionDtoResponse question;
+    private UUID questionId;
 
     private Boolean isCorrect;
 
