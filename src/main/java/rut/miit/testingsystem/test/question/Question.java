@@ -3,10 +3,13 @@ package rut.miit.testingsystem.test.question;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import rut.miit.testingsystem.test.Test;
-import rut.miit.testingsystem.test.question.dto.request.QuestionDTOCreateRequest;
+import rut.miit.testingsystem.test.answer.Answer;
+import rut.miit.testingsystem.test.question.dto.request.QuestionDto;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -18,7 +21,7 @@ public class Question {
     @GeneratedValue
     private UUID id;
 
-    @NotNull
+    @NotEmpty
     @Column(columnDefinition = "TEXT")
     private String text;
 
@@ -30,9 +33,9 @@ public class Question {
     @NotNull
     private Test test;
 
-    public Question(QuestionDTOCreateRequest createRequest, Test test) {
-        this.text= createRequest.getText();
-        this.additionalInfo= createRequest.getAdditionalInfo();
-        this.test=test;
-    }
+    @OneToMany(
+            orphanRemoval = true,
+            cascade = CascadeType.ALL,
+            mappedBy = "question")
+    private Set<Answer> answers;
 }
