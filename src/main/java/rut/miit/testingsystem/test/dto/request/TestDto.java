@@ -9,7 +9,7 @@ import java.util.UUID;
 
 @Data
 @NoArgsConstructor
-public class TestDTOCreateRequest {
+public class TestDto {
     @NotNull
     private UUID subjectId;
 

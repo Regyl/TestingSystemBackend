@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import rut.miit.testingsystem.exception.TestNotFoundException;
 import rut.miit.testingsystem.subject.SubjectService;
-import rut.miit.testingsystem.test.dto.request.TestDTOCreateRequest;
+import rut.miit.testingsystem.test.dto.request.TestDto;
 
 import java.util.List;
 import java.util.UUID;
@@ -17,15 +17,9 @@ public class TestService {
         this.repository=repository;
     }
 
-    private SubjectService subjectService;
-
-    @Autowired
-    public void setSubjectService(SubjectService subjectService) {
-        this.subjectService = subjectService;
-    }
 
     public List<Test> findAllBySubject(UUID subjectId) {
-        return repository.findAllBySubjectIdId(subjectId);
+        return repository.findAllBySubjectId(subjectId);
     }
 
     public List<Test> findAll() {
@@ -36,8 +30,8 @@ public class TestService {
         repository.deleteById(id);
     }
 
-    public Test create(TestDTOCreateRequest createRequest) {
-        return repository.save(new Test(createRequest, subjectService.findById(createRequest.getSubjectId())));
+    public Test create(Test test) {
+        return repository.save(test);
     }
 
     public Test findById(UUID id) {

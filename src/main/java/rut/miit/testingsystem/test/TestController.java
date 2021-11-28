@@ -1,33 +1,41 @@
 package rut.miit.testingsystem.test;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import rut.miit.testingsystem.test.dto.request.TestDTOCreateRequest;
-import rut.miit.testingsystem.test.dto.response.TestDTOCreateResponse;
+import rut.miit.testingsystem.test.dto.request.TestDto;
+import rut.miit.testingsystem.test.dto.response.TestDtoResponse;
 
 import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
+
+@Tag(name = "Tests")
 
 @RestController
 @RequestMapping("/tests")
 public class TestController implements ITestController {
-
     private final TestService service;
+    private final TestMapper mapper;
 
-    public TestController(TestService service) {
-        this.service=service;
+    public TestController(TestService service, TestMapper mapper) {
+        this.service = service;
+        this.mapper = mapper;
     }
 
     @GetMapping("/")
-    public List<Test> findAll() {
-        return service.findAll();
+    public List<TestDtoResponse> findAll() {
+        return service.findAll().stream()
+                .map(mapper::toDto)
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
-    public Test findById(@PathVariable UUID id) {
-        return service.findById(id);
+    public TestDtoResponse findById(@PathVariable UUID id) {
+        Test test = service.findById(id);
+        return mapper.toDto(test);
     }
 
     @DeleteMapping("/{id}")
@@ -37,14 +45,16 @@ public class TestController implements ITestController {
 
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<TestDTOCreateResponse> create(@RequestBody @Valid TestDTOCreateRequest createRequest) {
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(new TestDTOCreateResponse(service.create(createRequest)));
+    public TestDtoResponse create(@RequestBody @Valid TestDto dto) {
+        Test test = mapper.toEntity(dto);
+        test = service.create(test);
+        return mapper.toDto(test);
     }
 
     @GetMapping("/subject")
-    public List<Test> findAllBySubject(@RequestParam UUID id) {
-        return service.findAllBySubject(id);
+    public List<TestDtoResponse> findAllBySubject(@RequestParam UUID id) {
+        return service.findAllBySubject(id).stream()
+                .map(mapper::toDto)
+                .collect(Collectors.toList());
     }
 }
