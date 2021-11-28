@@ -53,9 +53,9 @@ public class AnswerController implements IAnswerController {
     }
 
     @GetMapping("/question")
-    public List<AnswerDtoStudentResponse> findByQuestion(@RequestParam UUID id) {
+    public List<AnswerDtoResponse> findByQuestion(@RequestParam UUID id) {
         return service.findByQuestion(id).stream()
-                .map(mapper::toStudentDto)
+                .map(mapper::toDto)
                 .collect(Collectors.toList());
     }
 }
