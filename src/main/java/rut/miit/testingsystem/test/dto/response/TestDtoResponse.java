@@ -1,37 +1,29 @@
-package rut.miit.testingsystem.test;
+package rut.miit.testingsystem.test.dto.response;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import rut.miit.testingsystem.ObjectDTOCreateResponse;
 import rut.miit.testingsystem.subject.Subject;
-import rut.miit.testingsystem.test.dto.request.TestDto;
+import rut.miit.testingsystem.test.Test;
 import rut.miit.testingsystem.test.question.Question;
+import rut.miit.testingsystem.test.question.dto.response.QuestionDtoResponse;
 
-import javax.persistence.*;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.Set;
 import java.util.UUID;
 
-@Entity
-@Table(name = "test")
 @Data
-@NoArgsConstructor
 @EqualsAndHashCode(exclude = "questions")
-public class Test {
-    @Id
-    @GeneratedValue
-    @NotNull
+public class TestDtoResponse extends ObjectDTOCreateResponse {
+
     private UUID id;
 
-    @NotNull
-    @ManyToOne
-    @JoinColumn(name = "subject_id")
     private Subject subject;
 
-    @NotNull
     private String name;
 
     private LocalDate startsAt;
@@ -40,6 +32,5 @@ public class Test {
 
     private Integer term; //Семестр, для которого доступен тест
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "test")
-    private Set<Question> questions;
+    private Set<QuestionDtoResponse> questions;
 }

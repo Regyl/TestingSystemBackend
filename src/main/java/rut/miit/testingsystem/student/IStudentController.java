@@ -6,8 +6,6 @@ import rut.miit.testingsystem.IController;
 import java.util.List;
 import java.util.UUID;
 
-@Tag(name = "Students")
-
 public interface IStudentController extends IController {
     @Override
     List<Student> findAll();

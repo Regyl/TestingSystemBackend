@@ -1,9 +1,10 @@
 package rut.miit.testingsystem.subject;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import rut.miit.testingsystem.subject.dto.request.SubjectDTOCreateRequest;
+import rut.miit.testingsystem.subject.dto.request.SubjectDto;
 import rut.miit.testingsystem.subject.dto.response.FacultyDtoResponse;
 import rut.miit.testingsystem.subject.dto.response.SubjectDTOResponse;
 import rut.miit.testingsystem.subject.faculty.Faculty;
@@ -12,6 +13,8 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
+
+@Tag(name = "Subjects")
 
 @RestController
 @RequestMapping("/subjects")
@@ -48,7 +51,7 @@ public class SubjectController implements ISubjectController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<SubjectDTOResponse> create(@RequestBody @Valid SubjectDTOCreateRequest createRequest) {
+    public ResponseEntity<SubjectDTOResponse> create(@RequestBody @Valid SubjectDto createRequest) {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(new SubjectDTOResponse(service.create(createRequest)));

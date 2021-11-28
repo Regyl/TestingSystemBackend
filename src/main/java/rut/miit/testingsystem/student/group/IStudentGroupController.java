@@ -9,8 +9,6 @@ import rut.miit.testingsystem.student.group.dto.response.StudentGroupDTOCreateRe
 import java.util.List;
 import java.util.UUID;
 
-@Tag(name = "Student groups")
-
 public interface IStudentGroupController extends IController {
     @Override
     List<StudentGroup> findAll();

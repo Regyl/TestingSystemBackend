@@ -1,31 +1,41 @@
 package rut.miit.testingsystem.test.question;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import rut.miit.testingsystem.test.question.dto.request.QuestionDTOCreateRequest;
-import rut.miit.testingsystem.test.question.dto.response.QuestionDTOCreateResponse;
+import rut.miit.testingsystem.test.question.dto.request.QuestionDto;
+import rut.miit.testingsystem.test.question.dto.response.QuestionDtoResponse;
 
 import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
+
+@Tag(name = "Question")
 
 @RestController
 @RequestMapping("/questions")
 public class QuestionController implements IQuestionController {
     private final QuestionService service;
-    public QuestionController(QuestionService service) {
-        this.service=service;
+    private final QuestionMapper mapper;
+
+    public QuestionController(QuestionService service, QuestionMapper mapper) {
+        this.service = service;
+        this.mapper = mapper;
     }
 
     @GetMapping("/")
-    public List<Question> findAll() {
-        return service.findAll();
+    public List<QuestionDtoResponse> findAll() {
+        return service.findAll().stream()
+                .map(mapper::toDto)
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
-    public Question findById(@PathVariable UUID id) {
-        return service.findById(id);
+    public QuestionDtoResponse findById(@PathVariable UUID id) {
+        Question question = service.findById(id);
+        return mapper.toDto(question);
     }
 
     @DeleteMapping("/{id}")
@@ -34,14 +44,17 @@ public class QuestionController implements IQuestionController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<QuestionDTOCreateResponse> create(@RequestBody @Valid QuestionDTOCreateRequest createRequest) {
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(new QuestionDTOCreateResponse(service.create(createRequest)));
+    @ResponseStatus(HttpStatus.CREATED)
+    public QuestionDtoResponse create(@RequestBody @Valid QuestionDto dto) {
+        Question question = mapper.toEntity(dto);
+        question = service.create(question);
+        return mapper.toDto(question);
     }
 
     @GetMapping("/test")
-    public List<Question> findByTest(@RequestParam UUID id) {
-        return service.findAllBYTest(id);
+    public List<QuestionDtoResponse> findByTest(@RequestParam UUID id) {
+        return service.findAllBYTest(id).stream()
+                .map(mapper::toDto)
+                .collect(Collectors.toList());
     }
 }

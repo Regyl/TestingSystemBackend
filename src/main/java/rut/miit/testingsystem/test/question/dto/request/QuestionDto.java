@@ -9,7 +9,7 @@ import java.util.UUID;
 
 @Data
 @NoArgsConstructor
-public class QuestionDTOCreateRequest {
+public class QuestionDto {
     @NotNull
     private String text;
 

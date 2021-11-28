@@ -2,7 +2,7 @@ package rut.miit.testingsystem.subject;
 
 import org.springframework.stereotype.Service;
 import rut.miit.testingsystem.exception.SubjectNotFoundException;
-import rut.miit.testingsystem.subject.dto.request.SubjectDTOCreateRequest;
+import rut.miit.testingsystem.subject.dto.request.SubjectDto;
 import rut.miit.testingsystem.subject.faculty.Faculty;
 
 import java.util.List;
@@ -31,7 +31,7 @@ public class SubjectService {
         repository.deleteById(id);
     }
 
-    public Subject create(SubjectDTOCreateRequest createRequest) {
+    public Subject create(SubjectDto createRequest) {
         return repository.save(new Subject(createRequest));
     }
 }
