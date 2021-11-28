@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 
 @Data
 @NoArgsConstructor
-public class SubjectDTOCreateRequest {
+public class SubjectDto {
     @NotNull
     private String name;
 
