@@ -1,8 +1,10 @@
 package rut.miit.testingsystem.test.question.dto.response;
 
+import lombok.Data;
 import rut.miit.testingsystem.ObjectDTOCreateResponse;
 import rut.miit.testingsystem.test.question.Question;
 
+@Data
 public class QuestionDTOCreateResponse extends ObjectDTOCreateResponse {
 
     private Question question;

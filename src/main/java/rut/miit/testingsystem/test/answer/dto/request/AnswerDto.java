@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 @Data
-public class AnswerDTOCreateRequest {
+public class AnswerDto {
     @NotNull
     private UUID questionId;
 

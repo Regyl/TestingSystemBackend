@@ -1,9 +1,8 @@
 package rut.miit.testingsystem.test.answer;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import rut.miit.testingsystem.exception.AnswerNotFoundException;
-import rut.miit.testingsystem.test.answer.dto.request.AnswerDTOCreateRequest;
+import rut.miit.testingsystem.test.answer.dto.request.AnswerDto;
 import rut.miit.testingsystem.test.question.QuestionService;
 
 import java.util.List;
@@ -11,12 +10,11 @@ import java.util.UUID;
 
 @Service
 public class AnswerService {
-    private final AnswerRepository repository;
-    private final QuestionService questionService;
 
-    public AnswerService(AnswerRepository repository, QuestionService questionService) {
+    private final AnswerRepository repository;
+
+    public AnswerService(AnswerRepository repository) {
         this.repository = repository;
-        this.questionService = questionService;
     }
 
     public Answer findById(UUID id) {
@@ -31,8 +29,8 @@ public class AnswerService {
         repository.deleteById(id);
     }
 
-    public Answer create(AnswerDTOCreateRequest createRequest) {
-        return repository.save(new Answer(createRequest, questionService.findById(createRequest.getQuestionId())));
+    public Answer save(Answer answer) {
+        return repository.save(answer);
     }
 
     public List<Answer> findByQuestion(UUID id) {

@@ -2,7 +2,7 @@ package rut.miit.testingsystem.test.answer;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import rut.miit.testingsystem.test.answer.dto.request.AnswerDTOCreateRequest;
+import rut.miit.testingsystem.test.answer.dto.request.AnswerDto;
 import rut.miit.testingsystem.test.question.Question;
 
 import javax.persistence.*;
@@ -30,7 +30,7 @@ public class Answer {
     private String text;
 
 
-    public Answer(AnswerDTOCreateRequest createRequest, Question question) {
+    public Answer(AnswerDto createRequest, Question question) {
         this.question=question;
         this.isCorrect=createRequest.getIsCorrect();
         this.text=createRequest.getText();
