@@ -12,12 +12,10 @@ import java.util.UUID;
 @Service
 public class AnswerService {
     private final AnswerRepository repository;
-    public AnswerService(AnswerRepository repository) {
-        this.repository=repository;
-    }
-    QuestionService questionService;
-    @Autowired
-    public void setQuestionService(QuestionService questionService) {
+    private final QuestionService questionService;
+
+    public AnswerService(AnswerRepository repository, QuestionService questionService) {
+        this.repository = repository;
         this.questionService = questionService;
     }
 
