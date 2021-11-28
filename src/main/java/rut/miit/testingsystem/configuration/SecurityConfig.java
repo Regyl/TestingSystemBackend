@@ -19,21 +19,30 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import rut.miit.testingsystem.auth.authority.Authorities;
 
-@Configuration
+
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebMvcConfigurer {
-    @Autowired
-    UserDetailsService userDetailsService;
+
+    private final UserDetailsService userDetailsService;
+    private final PasswordEncoder encoder;
+    private final AuthenticationSuccessHandler authenticationSuccessHandler;
+    private final AuthenticationFailureHandler authenticationFailureHandler;
+    private final LogoutSuccessHandler logoutSuccessHandler;
+
+    public SecurityConfig(
+            UserDetailsService userDetailsService, PasswordEncoder encoder, AuthenticationSuccessHandler authenticationSuccessHandler,
+            AuthenticationFailureHandler authenticationFailureHandler, LogoutSuccessHandler logoutSuccessHandler) {
+        this.userDetailsService = userDetailsService;
+        this.encoder = encoder;
+        this.authenticationSuccessHandler = authenticationSuccessHandler;
+        this.authenticationFailureHandler = authenticationFailureHandler;
+        this.logoutSuccessHandler = logoutSuccessHandler;
+    }
 
     @Autowired
     protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(encoder());
+        auth.userDetailsService(userDetailsService).passwordEncoder(encoder);
     }
-
-    @Bean
-    protected PasswordEncoder encoder() {
-        return new BCryptPasswordEncoder();
-    } //TODO: params for passwordEncoder
 
 
     @Override
@@ -45,24 +54,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
                 .antMatchers("/questions**", "/answers**", "/tests**").hasRole(Authorities.Professor.toString())
                 .antMatchers("**/readOnly**").hasRole(Authorities.Student.toString())
                 .and().formLogin().loginProcessingUrl("/sign-in")
-                .successHandler(authenticationSuccessHandler()).failureHandler(authenticationFailureHandler())
-                .and().logout().logoutUrl("/logout").logoutSuccessHandler(logoutSuccessHandler()).deleteCookies("JSESSIONID");
+                .successHandler(authenticationSuccessHandler).failureHandler(authenticationFailureHandler)
+                .and().logout().logoutUrl("/logout").logoutSuccessHandler(logoutSuccessHandler).deleteCookies("JSESSIONID");
     }
 
-    @Bean
-    public AuthenticationSuccessHandler authenticationSuccessHandler() {
-        return new CustomAuthenticationSuccessHandler();
-    }
-
-    @Bean
-    public AuthenticationFailureHandler authenticationFailureHandler() {
-        return new CustomAuthenticationFailureHandler();
-    }
-
-    @Bean
-    public LogoutSuccessHandler logoutSuccessHandler() {
-        return new CustomLogoutSuccessHandler();
-    }
 
     @Override
     public void addFormatters(FormatterRegistry registry) {

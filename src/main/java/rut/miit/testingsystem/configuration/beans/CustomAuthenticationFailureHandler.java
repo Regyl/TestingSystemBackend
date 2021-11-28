@@ -1,4 +1,4 @@
-package rut.miit.testingsystem.configuration;
+package rut.miit.testingsystem.configuration.beans;
 
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
