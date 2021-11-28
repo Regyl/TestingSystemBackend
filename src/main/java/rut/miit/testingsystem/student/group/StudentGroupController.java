@@ -1,5 +1,6 @@
 package rut.miit.testingsystem.student.group;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,6 +10,8 @@ import rut.miit.testingsystem.student.group.dto.response.StudentGroupDTOCreateRe
 import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
+
+@Tag(name = "Student groups")
 
 @RestController
 @RequestMapping("/students/groups")

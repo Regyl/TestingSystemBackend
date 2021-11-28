@@ -9,8 +9,6 @@ import rut.miit.testingsystem.subject.dto.response.SubjectDTOResponse;
 import java.util.List;
 import java.util.UUID;
 
-@Tag(name = "Subjects")
-
 public interface ISubjectController extends IController {
     @Override
     List<SubjectDTOResponse> findAll();

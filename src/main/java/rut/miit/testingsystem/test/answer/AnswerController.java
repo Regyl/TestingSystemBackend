@@ -1,5 +1,6 @@
 package rut.miit.testingsystem.test.answer;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import rut.miit.testingsystem.test.answer.dto.request.AnswerDto;
@@ -10,6 +11,8 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
+
+@Tag(name = "Answers")
 
 @RestController
 @RequestMapping("/answers")

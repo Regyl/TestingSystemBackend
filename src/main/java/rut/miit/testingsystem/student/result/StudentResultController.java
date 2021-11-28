@@ -1,9 +1,12 @@
 package rut.miit.testingsystem.student.result;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
+
+@Tag(name = "Student results")
 
 @RestController
 @RequestMapping("/students/results")
