@@ -50,9 +50,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
         http.cors().and().csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/register", "/login").permitAll()
-                .antMatchers("/students**", "/subjects**").hasRole(Authorities.Administrator.toString())
-                .antMatchers("/questions**", "/answers**", "/tests**").hasRole(Authorities.Professor.toString())
-                .antMatchers("**/readOnly**").hasRole(Authorities.Student.toString())
+                .antMatchers("/students/*", "/subjects/*").hasRole(Authorities.Administrator.toString())
+                .antMatchers("/questions/*", "/answers/*", "/tests/*").hasRole(Authorities.Professor.toString())
+                .antMatchers("").hasRole(Authorities.Student.toString()) //TODO:
                 .and().formLogin().loginProcessingUrl("/sign-in")
                 .successHandler(authenticationSuccessHandler).failureHandler(authenticationFailureHandler)
                 .and().logout().logoutUrl("/logout").logoutSuccessHandler(logoutSuccessHandler).deleteCookies("JSESSIONID");

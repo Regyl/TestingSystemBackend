@@ -3,6 +3,8 @@ package rut.miit.testingsystem.test.dto.request;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.UUID;
@@ -14,6 +16,8 @@ public class TestDto {
     private UUID subjectId;
 
     @NotNull
+    @Min(1)
+    @Max(6)
     private Integer term;
 
     private LocalDate startsAt;

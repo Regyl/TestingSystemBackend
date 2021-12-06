@@ -29,11 +29,11 @@ public class QuestionService {
         repository.deleteById(id);
     }
 
-    public Question create(Question question) {
+    public Question save(Question question) {
         return repository.save(question);
     }
 
-    public List<Question> findAllBYTest(UUID id) {
+    public List<Question> findAllByTest(UUID id) {
         return repository.findAllByTestId(id);
     }
 }

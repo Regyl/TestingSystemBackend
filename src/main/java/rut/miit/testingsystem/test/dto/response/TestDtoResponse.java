@@ -2,23 +2,17 @@ package rut.miit.testingsystem.test.dto.response;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import rut.miit.testingsystem.ObjectDTOCreateResponse;
+import rut.miit.testingsystem.AbstractDtoResponse;
 import rut.miit.testingsystem.subject.Subject;
-import rut.miit.testingsystem.test.Test;
-import rut.miit.testingsystem.test.question.Question;
 import rut.miit.testingsystem.test.question.dto.response.QuestionDtoResponse;
 
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.Set;
 import java.util.UUID;
 
 @Data
-@EqualsAndHashCode(exclude = "questions")
-public class TestDtoResponse extends ObjectDTOCreateResponse {
+@EqualsAndHashCode(exclude = "questions", callSuper = true)
+public class TestDtoResponse extends AbstractDtoResponse {
 
     private UUID id;
 

@@ -1,11 +1,12 @@
 package rut.miit.testingsystem.test.question;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rut.miit.testingsystem.test.question.dto.request.QuestionDto;
 import rut.miit.testingsystem.test.question.dto.response.QuestionDtoResponse;
+import rut.miit.testingsystem.test.question.dto.response.QuestionDtoStudentResponse;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -47,14 +48,22 @@ public class QuestionController implements IQuestionController {
     @ResponseStatus(HttpStatus.CREATED)
     public QuestionDtoResponse create(@RequestBody @Valid QuestionDto dto) {
         Question question = mapper.toEntity(dto);
-        question = service.create(question);
+        question = service.save(question);
         return mapper.toDto(question);
     }
 
     @GetMapping("/test")
     public List<QuestionDtoResponse> findByTest(@RequestParam UUID id) {
-        return service.findAllBYTest(id).stream()
+        return service.findAllByTest(id).stream()
                 .map(mapper::toDto)
+                .collect(Collectors.toList());
+    }
+
+    @GetMapping("/students/test")
+    @Operation(summary = "Q&A for student requests (without isCorrect param in answer)")
+    public List<QuestionDtoStudentResponse> findByTestForStudents(@RequestParam UUID id) {
+        return service.findAllByTest(id).stream()
+                .map(mapper::toStudentDto)
                 .collect(Collectors.toList());
     }
 }

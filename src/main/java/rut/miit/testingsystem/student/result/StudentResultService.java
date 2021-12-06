@@ -24,4 +24,8 @@ public class StudentResultService {
     public void deleteById(UUID id) {
         repository.deleteById(id);
     }
+
+    public StudentResult save(StudentResult result) {
+        return repository.save(result);
+    }
 }

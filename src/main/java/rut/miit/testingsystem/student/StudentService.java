@@ -3,8 +3,8 @@ package rut.miit.testingsystem.student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import rut.miit.testingsystem.exception.StudentNotFoundException;
-import rut.miit.testingsystem.student.dto.request.StudentDTOCreateRequest;
-import rut.miit.testingsystem.student.dto.request.StudentDTOGroupUpdateRequest;
+import rut.miit.testingsystem.student.dto.request.StudentDto;
+import rut.miit.testingsystem.student.dto.request.StudentDtoGroupUpdateRequest;
 import rut.miit.testingsystem.student.group.StudentGroupService;
 
 import java.util.List;
@@ -12,14 +12,13 @@ import java.util.UUID;
 
 @Service
 public class StudentService {
-    StudentRepository repository;
-    public StudentService(StudentRepository repository) {
-        this.repository=repository;
-    }
-    StudentGroupService groupService;
-    @Autowired
-    public void setRepository(StudentRepository repository) {
+
+    private final StudentRepository repository;
+    private final StudentGroupService groupService;
+
+    public StudentService(StudentRepository repository, StudentGroupService groupService) {
         this.repository = repository;
+        this.groupService = groupService;
     }
 
     public List<Student> findAll() {
@@ -30,8 +29,8 @@ public class StudentService {
         return repository.findById(id).orElseThrow(StudentNotFoundException::new);
     }
 
-    public Student create(StudentDTOCreateRequest createRequest) {
-        return repository.save(new Student(createRequest));
+    public Student save(Student student) {
+        return repository.save(student);
     }
 
     public void updateStatus(UUID studentId) {
@@ -40,9 +39,9 @@ public class StudentService {
         repository.save(student);
     }
 
-    public void updateGroup(StudentDTOGroupUpdateRequest updateRequest) { //TODO: move to repository @Query
+    public void updateGroup(StudentDtoGroupUpdateRequest updateRequest) { //TODO: move to repository @Query
         List<Student> students = repository.findAllById(updateRequest.getStudentIds());
-        students.forEach(student -> student.setGroupId(groupService.findById(updateRequest.getGroupId())));
+        students.forEach(student -> student.setGroup(groupService.findById(updateRequest.getGroupId())));
         repository.saveAll(students);
     }
 

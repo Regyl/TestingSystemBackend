@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class StudentDTOGroupUpdateRequest {
+public class StudentDtoGroupUpdateRequest {
     private UUID groupId;
 
     private List<UUID> studentIds;
 
-    public StudentDTOGroupUpdateRequest() {}
+    public StudentDtoGroupUpdateRequest() {}
 
     public List<UUID> getStudentIds() {
         if(this.studentIds==null)

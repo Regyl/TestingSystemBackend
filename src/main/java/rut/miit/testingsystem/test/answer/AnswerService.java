@@ -6,7 +6,9 @@ import rut.miit.testingsystem.test.answer.dto.request.AnswerDto;
 import rut.miit.testingsystem.test.question.QuestionService;
 
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class AnswerService {
@@ -35,5 +37,15 @@ public class AnswerService {
 
     public List<Answer> findByQuestion(UUID id) {
         return repository.findAllByQuestionId(id);
+    }
+
+    public List<Answer> findAllByIds(List<UUID> answerIds) {
+        return repository.findAllById(answerIds);
+    }
+
+    public double getResult(List<UUID> answerIds) {
+        List<Answer> answers = findAllByIds(answerIds);
+        answers = answers.stream().filter(Answer::getIsCorrect).collect(Collectors.toList());
+        return answers.size() * 1.0 / answerIds.size();
     }
 }

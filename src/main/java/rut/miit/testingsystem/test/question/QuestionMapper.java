@@ -6,6 +6,7 @@ import rut.miit.testingsystem.test.Test;
 import rut.miit.testingsystem.test.TestService;
 import rut.miit.testingsystem.test.question.dto.request.QuestionDto;
 import rut.miit.testingsystem.test.question.dto.response.QuestionDtoResponse;
+import rut.miit.testingsystem.test.question.dto.response.QuestionDtoStudentResponse;
 
 @Component
 public class QuestionMapper {
@@ -27,4 +28,9 @@ public class QuestionMapper {
     public QuestionDtoResponse toDto(Question question) {
         return mapper.map(question, QuestionDtoResponse.class);
     }
+
+    public QuestionDtoStudentResponse toStudentDto(Question question) {
+        return mapper.map(question, QuestionDtoStudentResponse.class);
+    }
+
 }

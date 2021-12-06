@@ -1,48 +1,41 @@
-package rut.miit.testingsystem.student;
+package rut.miit.testingsystem.student.dto.response;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import rut.miit.testingsystem.AbstractDtoResponse;
 import rut.miit.testingsystem.auth.user.User;
-import rut.miit.testingsystem.student.dto.request.StudentDto;
+import rut.miit.testingsystem.student.Student;
 import rut.miit.testingsystem.student.group.StudentGroup;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.UUID;
 
-@Entity
-@Table(name = "student")
 @Data
-public class Student {
+@EqualsAndHashCode(callSuper = true)
+public class StudentDtoResponse extends AbstractDtoResponse {
 
-    @Id
-    @GeneratedValue
     private UUID id;
 
-    @ManyToOne
-    @JoinColumn(name = "group_id")
     private StudentGroup group;
 
-    @NotNull
     private String firstName;
 
-    @NotNull
     private String patronymic;
 
     private String lastName;
 
-    @NotNull
     private LocalDate birthDate;
 
-    @NotNull
     private Integer admissionYear;
 
-    @Column(columnDefinition = "BOOLEAN DEFAULT false")
     private Boolean isAgreed = false; //подтверждение кода с почты
 
-    @NotNull
-    @OneToOne
     private User user;
+
+    private int accessCode;
 }

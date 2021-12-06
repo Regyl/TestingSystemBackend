@@ -1,13 +1,14 @@
 package rut.miit.testingsystem.test.answer.dto.response;
 
 import lombok.Data;
-import rut.miit.testingsystem.ObjectDTOCreateResponse;
-import rut.miit.testingsystem.test.question.dto.response.QuestionDtoResponse;
+import lombok.EqualsAndHashCode;
+import rut.miit.testingsystem.AbstractDtoResponse;
 
 import java.util.UUID;
 
 @Data
-public class AnswerDtoResponse extends ObjectDTOCreateResponse {
+@EqualsAndHashCode(callSuper = true)
+public class AnswerDtoResponse extends AbstractDtoResponse {
     private UUID id;
 
     private UUID questionId;

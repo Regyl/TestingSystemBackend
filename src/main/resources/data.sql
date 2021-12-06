@@ -2,6 +2,8 @@ INSERT INTO roles VALUES ('Professor');
 INSERT INTO roles VALUES ('Administrator');
 INSERT INTO roles VALUES ('Student');
 
+
+
 INSERT INTO subject VALUES ('acbaf82c-6d47-4e3a-b690-c1b424f88d08', 'MathematicsAndMechanics', 'Математика');
 
 INSERT INTO test VALUES ('acbaf82c-6d47-4e3a-b690-c1b424f88d08', '2022-01-17', 'Тест #1', '2021-12-01', 1, 'acbaf82c-6d47-4e3a-b690-c1b424f88d08');
