@@ -1,8 +1,7 @@
 package rut.miit.testingsystem.student;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import rut.miit.testingsystem.student.dto.request.StudentDTOCreateRequest;
+import rut.miit.testingsystem.auth.user.User;
 import rut.miit.testingsystem.student.group.StudentGroup;
 
 import javax.persistence.*;
@@ -13,18 +12,15 @@ import java.util.UUID;
 @Entity
 @Table(name = "student")
 @Data
-@NoArgsConstructor
 public class Student {
 
     @Id
     @GeneratedValue
-    @Column(unique = true)
-    @NotNull
     private UUID id;
 
     @ManyToOne
     @JoinColumn(name = "group_id")
-    private StudentGroup groupId;
+    private StudentGroup group;
 
     @NotNull
     private String firstName;
@@ -40,15 +36,10 @@ public class Student {
     @NotNull
     private Integer admissionYear;
 
-    @Column(columnDefinition = "boolean default false")
+    @Column(columnDefinition = "BOOLEAN DEFAULT false")
     private Boolean isAgreed = false; //подтверждение кода с почты
 
-
-    public Student(StudentDTOCreateRequest createRequest) {
-        this.birthDate=createRequest.getBirthDate();
-        this.firstName=createRequest.getFirstName();
-        this.patronymic=createRequest.getPatronymic();
-        this.lastName=createRequest.getLastName();
-        this.admissionYear=createRequest.getAdmissionYear();
-    }
+    @NotNull
+    @OneToOne
+    private User user;
 }

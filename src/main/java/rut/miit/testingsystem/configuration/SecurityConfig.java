@@ -1,16 +1,14 @@
 package rut.miit.testingsystem.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.format.datetime.standard.DateTimeFormatterRegistrar;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -28,6 +26,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
     private final AuthenticationSuccessHandler authenticationSuccessHandler;
     private final AuthenticationFailureHandler authenticationFailureHandler;
     private final LogoutSuccessHandler logoutSuccessHandler;
+
+    private static final String ADMIN = Authorities.Administrator.toString();
+    private static final String PROFESSOR = Authorities.Professor.toString();
+    private static final String STUDENT = Authorities.Student.toString();
 
     public SecurityConfig(
             UserDetailsService userDetailsService, PasswordEncoder encoder, AuthenticationSuccessHandler authenticationSuccessHandler,
@@ -50,9 +52,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
         http.cors().and().csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/register", "/login").permitAll()
-                .antMatchers("/students**", "/subjects**").hasRole(Authorities.Administrator.toString())
-                .antMatchers("/questions**", "/answers**", "/tests**").hasRole(Authorities.Professor.toString())
-                .antMatchers("**/readOnly**").hasRole(Authorities.Student.toString())
+                .antMatchers(HttpMethod.GET, "/subjects/*", "/tests/*", "/questions/*", "/answers/*").hasAnyAuthority(ADMIN, PROFESSOR, STUDENT)
+                .antMatchers("/subjects/*", "/students/groups/*").hasAuthority(ADMIN)
+                .antMatchers("/questions/*", "/answers/*", "/tests/*").hasAuthority(PROFESSOR)
+                .antMatchers("/students/results/*", "/students/*").hasAnyAuthority(ADMIN, STUDENT)
                 .and().formLogin().loginProcessingUrl("/sign-in")
                 .successHandler(authenticationSuccessHandler).failureHandler(authenticationFailureHandler)
                 .and().logout().logoutUrl("/logout").logoutSuccessHandler(logoutSuccessHandler).deleteCookies("JSESSIONID");

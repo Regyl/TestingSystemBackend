@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rut.miit.testingsystem.student.group.dto.request.StudentGroupDTOCreateRequest;
-import rut.miit.testingsystem.student.group.dto.response.StudentGroupDTOCreateResponse;
+import rut.miit.testingsystem.student.group.dto.response.StudentGroupDtoResponse;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -22,10 +22,10 @@ public class StudentGroupController implements IStudentGroupController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<StudentGroupDTOCreateResponse> create(@RequestBody @Valid StudentGroupDTOCreateRequest createRequest) {
+    public ResponseEntity<StudentGroupDtoResponse> create(@RequestBody @Valid StudentGroupDTOCreateRequest createRequest) {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(new StudentGroupDTOCreateResponse(service.save(createRequest)));
+                .body(new StudentGroupDtoResponse(service.save(createRequest)));
     }
 
     @GetMapping("/")

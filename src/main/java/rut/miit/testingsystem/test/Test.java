@@ -4,14 +4,11 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import rut.miit.testingsystem.subject.Subject;
-import rut.miit.testingsystem.test.dto.request.TestDto;
 import rut.miit.testingsystem.test.question.Question;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.Set;
 import java.util.UUID;
 
@@ -23,7 +20,6 @@ import java.util.UUID;
 public class Test {
     @Id
     @GeneratedValue
-    @NotNull
     private UUID id;
 
     @NotNull

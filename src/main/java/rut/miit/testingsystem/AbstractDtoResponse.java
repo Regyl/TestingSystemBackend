@@ -5,10 +5,11 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 @Data
-public abstract class ObjectDTOCreateResponse {
+public class AbstractDtoResponse {
+
     private LocalDateTime timestamp;
 
-    protected ObjectDTOCreateResponse() {
+    protected AbstractDtoResponse() {
         this.timestamp=LocalDateTime.now();
     }
 }

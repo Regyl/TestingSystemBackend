@@ -1,15 +1,15 @@
 package rut.miit.testingsystem.subject.dto.response;
 
 import lombok.Data;
-import rut.miit.testingsystem.ObjectDTOCreateResponse;
+import lombok.EqualsAndHashCode;
+import rut.miit.testingsystem.AbstractDtoResponse;
 import rut.miit.testingsystem.subject.Subject;
-import rut.miit.testingsystem.subject.faculty.Faculty;
 
-import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 @Data
-public class SubjectDTOResponse extends ObjectDTOCreateResponse {
+@EqualsAndHashCode(callSuper = true)
+public class SubjectDTOResponse extends AbstractDtoResponse {
 
     private UUID id;
 

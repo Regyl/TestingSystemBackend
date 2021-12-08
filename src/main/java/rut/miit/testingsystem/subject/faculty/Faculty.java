@@ -1,9 +1,7 @@
 package rut.miit.testingsystem.subject.faculty;
 
-import lombok.Data;
 import lombok.Getter;
 
-import java.util.Arrays;
 import java.util.stream.Stream;
 
 @Getter

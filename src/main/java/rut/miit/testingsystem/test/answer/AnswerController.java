@@ -5,7 +5,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import rut.miit.testingsystem.test.answer.dto.request.AnswerDto;
 import rut.miit.testingsystem.test.answer.dto.response.AnswerDtoResponse;
-import rut.miit.testingsystem.test.answer.dto.response.AnswerDtoStudentResponse;
 
 import javax.validation.Valid;
 import java.util.List;

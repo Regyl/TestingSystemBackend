@@ -1,6 +1,8 @@
 package rut.miit.testingsystem.student.result;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+import rut.miit.testingsystem.exception.EntityNotFoundException;
 import rut.miit.testingsystem.exception.StudentResultNotFoundException;
 
 import java.util.List;
@@ -22,6 +24,14 @@ public class StudentResultService {
     }
 
     public void deleteById(UUID id) {
-        repository.deleteById(id);
+        try {
+            repository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new EntityNotFoundException(id, StudentResult.class);
+        }
+    }
+
+    public StudentResult save(StudentResult result) {
+        return repository.save(result);
     }
 }
