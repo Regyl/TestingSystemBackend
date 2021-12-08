@@ -1,17 +1,17 @@
 package rut.miit.testingsystem.student.result.dto.request;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 
 @Data
-@EqualsAndHashCode(exclude = "answers")
 public class StudentResultDto {
 
+    @NotNull
     private List<UUID> answers;
 
+    @NotNull
     private UUID testId;
 }

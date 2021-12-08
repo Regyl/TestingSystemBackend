@@ -1,10 +1,7 @@
 package rut.miit.testingsystem.test.question;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import rut.miit.testingsystem.exception.QuestionNotFoundException;
-import rut.miit.testingsystem.test.TestService;
-import rut.miit.testingsystem.test.question.dto.request.QuestionDto;
 
 import java.util.List;
 import java.util.UUID;

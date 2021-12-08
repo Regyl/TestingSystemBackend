@@ -1,11 +1,9 @@
 package rut.miit.testingsystem.student;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import rut.miit.testingsystem.auth.user.User;
 import rut.miit.testingsystem.exception.EntityNotFoundException;
 import rut.miit.testingsystem.exception.StudentNotFoundException;
-import rut.miit.testingsystem.student.dto.request.StudentDto;
 import rut.miit.testingsystem.student.dto.request.StudentDtoGroupUpdateRequest;
 import rut.miit.testingsystem.student.group.StudentGroupService;
 

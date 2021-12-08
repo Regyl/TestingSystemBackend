@@ -1,10 +1,7 @@
 package rut.miit.testingsystem.student;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 import rut.miit.testingsystem.auth.user.User;
-import rut.miit.testingsystem.student.dto.request.StudentDto;
 import rut.miit.testingsystem.student.group.StudentGroup;
 
 import javax.persistence.*;

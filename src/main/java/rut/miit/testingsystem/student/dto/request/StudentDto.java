@@ -2,7 +2,6 @@ package rut.miit.testingsystem.student.dto.request;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import rut.miit.testingsystem.auth.user.User;
 
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;

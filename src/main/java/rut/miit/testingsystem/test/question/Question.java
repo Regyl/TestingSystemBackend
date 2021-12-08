@@ -5,7 +5,6 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import rut.miit.testingsystem.test.Test;
 import rut.miit.testingsystem.test.answer.Answer;
-import rut.miit.testingsystem.test.question.dto.request.QuestionDto;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;

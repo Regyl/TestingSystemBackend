@@ -2,11 +2,8 @@ package rut.miit.testingsystem.test.answer;
 
 import org.springframework.stereotype.Service;
 import rut.miit.testingsystem.exception.AnswerNotFoundException;
-import rut.miit.testingsystem.test.answer.dto.request.AnswerDto;
-import rut.miit.testingsystem.test.question.QuestionService;
 
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 

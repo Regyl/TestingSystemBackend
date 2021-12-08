@@ -2,7 +2,6 @@ package rut.miit.testingsystem.test;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rut.miit.testingsystem.test.dto.request.TestDto;
 import rut.miit.testingsystem.test.dto.response.TestDtoResponse;

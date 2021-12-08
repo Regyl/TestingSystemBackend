@@ -4,10 +4,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import rut.miit.testingsystem.AbstractDtoResponse;
 import rut.miit.testingsystem.student.Student;
-import rut.miit.testingsystem.test.Test;
+import rut.miit.testingsystem.student.dto.response.StudentDtoResponse;
 
-import javax.persistence.OneToOne;
-import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 @Data
@@ -16,9 +14,9 @@ public class StudentResultDtoResponse extends AbstractDtoResponse {
 
     private UUID id;
 
-    private Student student;
+    private StudentDtoResponse student;
 
-    private Test test;
+    private UUID testId;
 
-    private double resultScore;
+    private Double resultScore;
 }

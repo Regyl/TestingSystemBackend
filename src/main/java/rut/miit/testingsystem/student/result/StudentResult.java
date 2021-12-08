@@ -1,7 +1,6 @@
 package rut.miit.testingsystem.student.result;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import rut.miit.testingsystem.student.Student;
 import rut.miit.testingsystem.test.Test;
 
@@ -28,5 +27,5 @@ public class StudentResult {
     private Test test;
 
     @NotNull
-    private double resultScore;
+    private Double resultScore;
 }

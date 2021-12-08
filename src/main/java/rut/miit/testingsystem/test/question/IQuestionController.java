@@ -1,6 +1,5 @@
 package rut.miit.testingsystem.test.question;
 
-import io.swagger.v3.oas.annotations.tags.Tag;
 import rut.miit.testingsystem.IController;
 import rut.miit.testingsystem.test.question.dto.response.QuestionDtoResponse;
 
