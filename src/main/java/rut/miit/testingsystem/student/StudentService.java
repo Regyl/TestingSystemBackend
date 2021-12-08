@@ -2,6 +2,8 @@ package rut.miit.testingsystem.student;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import rut.miit.testingsystem.auth.user.User;
+import rut.miit.testingsystem.exception.EntityNotFoundException;
 import rut.miit.testingsystem.exception.StudentNotFoundException;
 import rut.miit.testingsystem.student.dto.request.StudentDto;
 import rut.miit.testingsystem.student.dto.request.StudentDtoGroupUpdateRequest;
@@ -45,11 +47,12 @@ public class StudentService {
         repository.saveAll(students);
     }
 
-    public List<Student> findByGroupIdIsNull() {
-        return repository.findAllByGroupIdIsNull();
-    }
-
     public void deleteById(UUID id) {
         repository.deleteById(id);
+    }
+
+    public Student findByUser(User user) {
+        return repository.findByUser(user)
+                .orElseThrow(() -> new EntityNotFoundException(user.getUsername(), User.class));
     }
 }

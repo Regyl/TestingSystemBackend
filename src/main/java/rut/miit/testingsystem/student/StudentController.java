@@ -44,16 +44,10 @@ public class StudentController implements IStudentController {
         return mapper.toDto(student);
     }
 
-    @PutMapping("/")
+    @PutMapping("/email")
     @Operation(summary = "Update user info after registration")
     public void postCreate(@RequestParam UUID studentId) {
         service.updateStatus(studentId);
-    }
-
-    @GetMapping("/emptygroup")
-    @Operation(summary = "Returns all students without group")
-    public List<Student> findStudentsWithoutGroup() {
-        return service.findByGroupIdIsNull();
     }
 
     @DeleteMapping("/{id}")
@@ -61,7 +55,7 @@ public class StudentController implements IStudentController {
         service.deleteById(id);
     }
 
-    @PutMapping("/updategroup")
+    @PutMapping("/group")
     @Operation(summary = "Add to student any group")
     public void updateStudentsGroup(@RequestBody @Valid StudentDtoGroupUpdateRequest groupUpdateRequest) {
         service.updateGroup(groupUpdateRequest);

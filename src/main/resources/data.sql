@@ -2,7 +2,10 @@ INSERT INTO roles VALUES ('Professor');
 INSERT INTO roles VALUES ('Administrator');
 INSERT INTO roles VALUES ('Student');
 
-
+INSERT INTO users (username, password) VALUES ('vova', '$2a$10$PXvzXXJBVqSf0u5qPlfiT.9RIGxuBcNtLzVZmDxfEb2o.Y.5KEod2');
+INSERT INTO users (username, password) VALUES ('eug', '$2a$10$PXvzXXJBVqSf0u5qPlfiT.9RIGxuBcNtLzVZmDxfEb2o.Y.5KEod2');
+INSERT INTO student VALUES (gen_random_uuid(), 2021, '07-01-2002', 'Владимир', null, 'Долбицын', 'idk', null, 'vova');
+INSERT INTO student VALUES (gen_random_uuid(), 2021, '12-08-2002', 'Евгений', null, 'Новиков', 'Алексеевич', null, 'eug');
 
 INSERT INTO subject VALUES ('acbaf82c-6d47-4e3a-b690-c1b424f88d08', 'MathematicsAndMechanics', 'Математика');
 

@@ -5,10 +5,12 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import rut.miit.testingsystem.student.result.dto.request.StudentResultDto;
+import rut.miit.testingsystem.student.result.dto.response.StudentResultDtoResponse;
 
 import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Tag(name = "Student results")
 
@@ -25,26 +27,30 @@ public class StudentResultController implements IStudentResultController {
     }
 
     @GetMapping("/")
-    public List<StudentResult> findAll() {
-        return service.findAll();
+    public List<StudentResultDtoResponse> findAll() {
+        return service.findAll().stream()
+                .map(mapper::toDto)
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
-    public StudentResult findById(@PathVariable UUID id) {
-        return service.findById(id);
+    public StudentResultDtoResponse findById(@PathVariable UUID id) {
+        StudentResult result = service.findById(id);
+        return mapper.toDto(result);
     }
 
     @DeleteMapping("/{id}")
     public void deleteById(@PathVariable UUID id) {
-        //TODO:
+        service.deleteById(id);
     }
 
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Send student answers")
-    public void save(@RequestBody @Valid StudentResultDto dto) {
+    public StudentResultDtoResponse save(@RequestBody @Valid StudentResultDto dto) {
         StudentResult result = mapper.toEntity(dto);
-        service.save(result);
+        result = service.save(result);
+        return mapper.toDto(result);
     }
 
 

@@ -1,32 +1,24 @@
-package rut.miit.testingsystem.student.result;
+package rut.miit.testingsystem.student.result.dto.response;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.EqualsAndHashCode;
+import rut.miit.testingsystem.AbstractDtoResponse;
 import rut.miit.testingsystem.student.Student;
 import rut.miit.testingsystem.test.Test;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
-@Entity
 @Data
-public class StudentResult {
-    @Id
-    @GeneratedValue
+@EqualsAndHashCode(callSuper = true)
+public class StudentResultDtoResponse extends AbstractDtoResponse {
+
     private UUID id;
 
-    @NotNull
-    @OneToOne
     private Student student;
 
-    @NotNull
-    @OneToOne
     private Test test;
 
-    @NotNull
     private double resultScore;
 }
