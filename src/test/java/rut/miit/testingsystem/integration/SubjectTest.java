@@ -6,17 +6,11 @@ import org.jboss.logging.Logger;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest.*;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.security.test.context.support.WithUserDetails;
-import org.springframework.test.context.jdbc.Sql;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.RequestBuilder;
-import rut.miit.testingsystem.subject.dto.response.SubjectDTOResponse;
+import rut.miit.testingsystem.subject.dto.response.SubjectDtoResponse;
 
 import java.util.List;
 
@@ -40,7 +34,7 @@ class SubjectTest {
     @Test
     void getAll() throws Exception {
         MvcResult result = mvc.perform(get("/subjects/")).andExpect(status().isOk()).andReturn();
-        List<SubjectDTOResponse> responses = mapper.readValue(result.getResponse().getContentAsString(), new TypeReference<>(){});
+        List<SubjectDtoResponse> responses = mapper.readValue(result.getResponse().getContentAsString(), new TypeReference<>(){});
         assertFalse(responses.size() < 1, "There must be almost one subject!");
     }
 }

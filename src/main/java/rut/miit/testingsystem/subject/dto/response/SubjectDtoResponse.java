@@ -10,8 +10,7 @@ import java.util.UUID;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-@NoArgsConstructor
-public class SubjectDTOResponse extends AbstractDtoResponse {
+public class SubjectDtoResponse extends AbstractDtoResponse {
 
     private UUID id;
 
@@ -19,10 +18,4 @@ public class SubjectDTOResponse extends AbstractDtoResponse {
 
     private FacultyDtoResponse faculty;
 
-    public SubjectDTOResponse(Subject subject) {
-        super();
-        this.id=subject.getId();
-        this.name=subject.getName();
-        this.faculty=FacultyDtoResponse.of(subject.getFaculty());
-    }
 }

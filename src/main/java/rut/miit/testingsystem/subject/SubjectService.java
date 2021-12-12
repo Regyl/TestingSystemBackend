@@ -10,7 +10,9 @@ import java.util.UUID;
 
 @Service
 public class SubjectService {
+
     private final SubjectRepository repository;
+
     public SubjectService(SubjectRepository repository) {
         this.repository=repository;
     }
@@ -31,7 +33,7 @@ public class SubjectService {
         repository.deleteById(id);
     }
 
-    public Subject create(SubjectDto createRequest) {
-        return repository.save(new Subject(createRequest));
+    public Subject create(Subject subject) {
+        return repository.save(subject);
     }
 }
