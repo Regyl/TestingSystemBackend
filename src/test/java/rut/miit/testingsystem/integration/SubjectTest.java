@@ -19,15 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.junit.jupiter.api.Assertions.*;
 
 @WithUserDetails(value = "admin")
-@AutoConfigureMockMvc
-@SpringBootTest
-class SubjectTest {
-
-    @Autowired
-    private MockMvc mvc;
-
-    @Autowired
-    private ObjectMapper mapper;
+class SubjectTest extends AbstractIntegrationTest {
 
     private static final Logger log = Logger.getLogger(SubjectTest.class.getName());
 
