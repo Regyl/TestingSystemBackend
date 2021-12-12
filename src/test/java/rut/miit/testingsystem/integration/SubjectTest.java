@@ -37,10 +37,7 @@ class SubjectTest extends AbstractIntegrationTest {
         MvcResult result = mvc.perform(post("/subjects/").contentType(JSON).content(mapper.writeValueAsString(dto))).andExpect(status().isCreated()).andReturn();
         SubjectDtoResponse response = mapper.readValue(result.getResponse().getContentAsString(), SubjectDtoResponse.class);
         assertEquals(dto.getName(), response.getName());
-    }
 
-    @Test
-    void delete() throws Exception {
-
+        mvc.perform(delete("/subjects/{id}", response.getId())).andExpect(status().isOk());
     }
 }
