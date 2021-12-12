@@ -7,7 +7,6 @@ import rut.miit.testingsystem.subject.faculty.Faculty;
 import javax.validation.constraints.NotNull;
 
 @Data
-@NoArgsConstructor
 public class SubjectDto {
     @NotNull
     private String name;
