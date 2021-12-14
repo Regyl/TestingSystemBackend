@@ -9,7 +9,7 @@ import javax.validation.constraints.NotEmpty;
 
 @NoArgsConstructor
 @Data
-public class UserDTORegisterRequest {
+public class UserDto {
     @NotEmpty
     private String login;
 

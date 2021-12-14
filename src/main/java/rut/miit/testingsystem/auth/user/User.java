@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import rut.miit.testingsystem.auth.authority.Role;
-import rut.miit.testingsystem.auth.user.dto.request.UserDTORegisterRequest;
+import rut.miit.testingsystem.auth.user.dto.request.UserDto;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -39,7 +39,7 @@ public class User implements UserDetails {
     @ManyToMany(fetch = FetchType.EAGER) //Если ставить lazy падает с LazyInitializationException
     private Set<Role> authorities = new HashSet<>(3);
 
-    public User(UserDTORegisterRequest userDTORegisterRequest) {
+    public User(UserDto userDTORegisterRequest) {
         this.username= userDTORegisterRequest.getLogin();
         this.password= new BCryptPasswordEncoder().encode(userDTORegisterRequest.getPassword());
         this.authorities.add(new Role(userDTORegisterRequest));

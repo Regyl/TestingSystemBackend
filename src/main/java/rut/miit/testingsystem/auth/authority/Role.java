@@ -4,7 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import rut.miit.testingsystem.auth.user.User;
-import rut.miit.testingsystem.auth.user.dto.request.UserDTORegisterRequest;
+import rut.miit.testingsystem.auth.user.dto.request.UserDto;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -25,7 +25,7 @@ public class Role implements GrantedAuthority {
     @ManyToMany(mappedBy = "authorities")
     private Set<User> users;
 
-    public Role(UserDTORegisterRequest userDTORegisterRequest) {
+    public Role(UserDto userDTORegisterRequest) {
         this.authority= userDTORegisterRequest.getAuthority();
     }
 
