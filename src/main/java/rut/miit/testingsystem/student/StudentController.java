@@ -11,6 +11,7 @@ import rut.miit.testingsystem.student.dto.response.StudentDtoResponse;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Tag(name = "Students")
 
@@ -27,13 +28,16 @@ public class StudentController implements IStudentController {
     }
 
     @GetMapping("/")
-    public List<Student> findAll() {
-        return service.findAll();
+    public List<StudentDtoResponse> findAll() {
+        return service.findAll().stream()
+                .map(mapper::toDto)
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
-    public Student findById(@PathVariable UUID id) {
-        return service.findById(id);
+    public StudentDtoResponse findById(@PathVariable UUID id) {
+        Student student = service.findById(id);
+        return mapper.toDto(student);
     }
 
     @PostMapping("/")

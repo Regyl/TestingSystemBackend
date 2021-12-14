@@ -12,7 +12,6 @@ import java.util.UUID;
 @Entity
 @Table(name = "subject")
 @Data
-@NoArgsConstructor
 public class Subject {
     @Id
     @GeneratedValue
@@ -25,8 +24,4 @@ public class Subject {
     @Enumerated(EnumType.STRING)
     private Faculty faculty;
 
-    public Subject(SubjectDto createRequest) {
-        this.name=createRequest.getName();
-        this.faculty=createRequest.getFaculty();
-    }
 }

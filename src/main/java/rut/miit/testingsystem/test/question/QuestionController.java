@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/questions")
 public class QuestionController implements IQuestionController {
+
     private final QuestionService service;
     private final QuestionMapper mapper;
 

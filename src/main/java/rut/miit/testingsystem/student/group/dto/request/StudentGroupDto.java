@@ -2,7 +2,7 @@ package rut.miit.testingsystem.student.group.dto.request;
 
 import javax.validation.constraints.NotNull;
 
-public class StudentGroupDTOCreateRequest {
+public class StudentGroupDto {
     @NotNull
     private String shortName;
 

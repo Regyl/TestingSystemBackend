@@ -44,6 +44,8 @@ dependencies {
     implementation 'org.springdoc:springdoc-openapi-ui:1.5.12'
     implementation 'org.springdoc:springdoc-openapi-security:1.5.12'
     implementation 'org.modelmapper:modelmapper:2.4.4'
+
+    testImplementation 'uk.co.jemos.podam:podam:7.2.7.RELEASE'
 }
 
 test {
