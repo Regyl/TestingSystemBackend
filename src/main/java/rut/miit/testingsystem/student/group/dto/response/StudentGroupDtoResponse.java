@@ -6,11 +6,18 @@ import lombok.EqualsAndHashCode;
 import rut.miit.testingsystem.AbstractDtoResponse;
 import rut.miit.testingsystem.student.group.StudentGroup;
 
+import javax.persistence.Column;
+import javax.validation.constraints.NotNull;
+import java.util.UUID;
+
 @Data
 @EqualsAndHashCode(callSuper = true)
-@AllArgsConstructor
 public class StudentGroupDtoResponse extends AbstractDtoResponse {
 
-    private StudentGroup group;
+    private UUID id;
+
+    private String shortName;
+
+    private Integer number;
 
 }

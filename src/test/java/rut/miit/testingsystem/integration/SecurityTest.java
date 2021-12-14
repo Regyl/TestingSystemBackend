@@ -12,12 +12,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-@AutoConfigureMockMvc
-@SpringBootTest
-class SecurityTest {
+class SecurityTest extends AbstractIntegrationTest {
 
-    @Autowired
-    private MockMvc mvc;
 
     @WithUserDetails(value = "admin")
     @Test

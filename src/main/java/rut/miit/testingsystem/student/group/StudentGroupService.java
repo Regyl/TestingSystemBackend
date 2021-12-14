@@ -2,20 +2,22 @@ package rut.miit.testingsystem.student.group;
 
 import org.springframework.stereotype.Service;
 import rut.miit.testingsystem.exception.StudentGroupNotFoundException;
-import rut.miit.testingsystem.student.group.dto.request.StudentGroupDTOCreateRequest;
+import rut.miit.testingsystem.student.group.dto.request.StudentGroupDto;
 
 import java.util.List;
 import java.util.UUID;
 
 @Service
 public class StudentGroupService {
-    StudentGroupRepository repository;
+
+    private final StudentGroupRepository repository;
+
     public StudentGroupService(StudentGroupRepository repository) {
         this.repository=repository;
     }
 
-    public StudentGroup save(StudentGroupDTOCreateRequest createRequest) {
-        return repository.save(new StudentGroup(createRequest));
+    public StudentGroup save(StudentGroup studentGroup) {
+        return repository.save(studentGroup);
     }
 
     public List<StudentGroup> findAll() {

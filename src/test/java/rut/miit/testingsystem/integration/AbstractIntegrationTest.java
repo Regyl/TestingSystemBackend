@@ -10,6 +10,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
+
 @AutoConfigureMockMvc
 @SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
 abstract class AbstractIntegrationTest {

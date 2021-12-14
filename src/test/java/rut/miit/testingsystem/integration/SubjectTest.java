@@ -25,14 +25,14 @@ class SubjectTest extends AbstractIntegrationTest {
     private static final Logger log = Logger.getLogger(SubjectTest.class.getName());
 
     @Test
-    void getAll() throws Exception {
+    void findAll() throws Exception {
         MvcResult result = mvc.perform(get("/subjects/")).andExpect(status().isOk()).andReturn();
         List<SubjectDtoResponse> responses = mapper.readValue(result.getResponse().getContentAsString(), new TypeReference<>(){});
         assertFalse(responses.size() < 1, "There must be almost one subject!");
     }
 
     @Test
-    void create() throws Exception {
+    void createDelete() throws Exception {
         SubjectDto dto = podamFactory.manufacturePojo(SubjectDto.class);
         MvcResult result = mvc.perform(post("/subjects/").contentType(JSON).content(mapper.writeValueAsString(dto))).andExpect(status().isCreated()).andReturn();
         SubjectDtoResponse response = mapper.readValue(result.getResponse().getContentAsString(), SubjectDtoResponse.class);
@@ -40,4 +40,11 @@ class SubjectTest extends AbstractIntegrationTest {
 
         mvc.perform(delete("/subjects/{id}", response.getId())).andExpect(status().isOk());
     }
+
+    /*@Test
+    void update() throws Exception {
+        MvcResult result = mvc.perform(get("/subjects/")).andExpect(status().isOk()).andReturn();
+        List<SubjectDtoResponse> responses = mapper.readValue(result.getResponse().getContentAsString(), new TypeReference<>(){});
+
+    }*/
 }
