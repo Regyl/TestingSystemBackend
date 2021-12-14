@@ -1,53 +1,57 @@
 package rut.miit.testingsystem.student;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import rut.miit.testingsystem.student.dto.request.StudentDTOCreateRequest;
-import rut.miit.testingsystem.student.dto.request.StudentDTOGroupUpdateRequest;
-import rut.miit.testingsystem.student.dto.response.StudentDTOCreateResponse;
+import rut.miit.testingsystem.student.dto.request.StudentDto;
+import rut.miit.testingsystem.student.dto.request.StudentDtoGroupUpdateRequest;
+import rut.miit.testingsystem.student.dto.response.StudentDtoResponse;
 
 import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
+
+@Tag(name = "Students")
 
 @RestController
 @RequestMapping("/students")
 public class StudentController implements IStudentController {
+
     private final StudentService service;
-    public StudentController(StudentService service) {
-        this.service=service;
+    private final StudentMapper mapper;
+
+    public StudentController(StudentService service, StudentMapper mapper) {
+        this.service = service;
+        this.mapper = mapper;
     }
 
     @GetMapping("/")
-    public List<Student> findAll() {
-        return service.findAll();
+    public List<StudentDtoResponse> findAll() {
+        return service.findAll().stream()
+                .map(mapper::toDto)
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
-    public Student findById(@PathVariable UUID id) {
-        return service.findById(id);
+    public StudentDtoResponse findById(@PathVariable UUID id) {
+        Student student = service.findById(id);
+        return mapper.toDto(student);
     }
 
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<StudentDTOCreateResponse> create(@RequestBody @Valid StudentDTOCreateRequest createRequest) {
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(new StudentDTOCreateResponse(service.create(createRequest)));
+    public StudentDtoResponse create(@RequestBody @Valid StudentDto dto) {
+        Student student = mapper.toEntity(dto);
+        student = service.save(student);
+        return mapper.toDto(student);
     }
 
-    @PutMapping("/")
+    @PutMapping("/email")
     @Operation(summary = "Update user info after registration")
     public void postCreate(@RequestParam UUID studentId) {
         service.updateStatus(studentId);
-    }
-
-    @GetMapping("/emptygroup")
-    @Operation(summary = "Returns all students without group")
-    public List<Student> findStudentsWithoutGroup() {
-        return service.findByGroupIdIsNull();
     }
 
     @DeleteMapping("/{id}")
@@ -55,9 +59,9 @@ public class StudentController implements IStudentController {
         service.deleteById(id);
     }
 
-    @PutMapping("/updategroup")
+    @PutMapping("/group")
     @Operation(summary = "Add to student any group")
-    public void updateStudentsGroup(@RequestBody @Valid StudentDTOGroupUpdateRequest groupUpdateRequest) {
+    public void updateStudentsGroup(@RequestBody @Valid StudentDtoGroupUpdateRequest groupUpdateRequest) {
         service.updateGroup(groupUpdateRequest);
     }
 }

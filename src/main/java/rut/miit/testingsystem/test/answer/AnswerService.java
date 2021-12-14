@@ -1,24 +1,19 @@
 package rut.miit.testingsystem.test.answer;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import rut.miit.testingsystem.exception.AnswerNotFoundException;
-import rut.miit.testingsystem.test.answer.dto.request.AnswerDTOCreateRequest;
-import rut.miit.testingsystem.test.question.QuestionService;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class AnswerService {
-    final AnswerRepository repository;
+
+    private final AnswerRepository repository;
+
     public AnswerService(AnswerRepository repository) {
-        this.repository=repository;
-    }
-    QuestionService questionService;
-    @Autowired
-    public void setQuestionService(QuestionService questionService) {
-        this.questionService = questionService;
+        this.repository = repository;
     }
 
     public Answer findById(UUID id) {
@@ -33,7 +28,21 @@ public class AnswerService {
         repository.deleteById(id);
     }
 
-    public Answer create(AnswerDTOCreateRequest createRequest) {
-        return repository.save(new Answer(createRequest, questionService.findById(createRequest.getQuestionId())));
+    public Answer save(Answer answer) {
+        return repository.save(answer);
+    }
+
+    public List<Answer> findByQuestion(UUID id) {
+        return repository.findAllByQuestionId(id);
+    }
+
+    public List<Answer> findAllByIds(List<UUID> answerIds) {
+        return repository.findAllById(answerIds);
+    }
+
+    public double getResult(List<UUID> answerIds) {
+        List<Answer> answers = findAllByIds(answerIds);
+        answers = answers.stream().filter(Answer::getIsCorrect).collect(Collectors.toList());
+        return answers.size() * 1.0 / answerIds.size();
     }
 }

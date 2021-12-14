@@ -1,22 +1,18 @@
 package rut.miit.testingsystem.student.group;
 
-import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.http.ResponseEntity;
 import rut.miit.testingsystem.IController;
-import rut.miit.testingsystem.student.group.dto.request.StudentGroupDTOCreateRequest;
-import rut.miit.testingsystem.student.group.dto.response.StudentGroupDTOCreateResponse;
+import rut.miit.testingsystem.student.group.dto.request.StudentGroupDto;
+import rut.miit.testingsystem.student.group.dto.response.StudentGroupDtoResponse;
 
 import java.util.List;
 import java.util.UUID;
 
-@Tag(name = "Student groups")
-
 public interface IStudentGroupController extends IController {
     @Override
-    List<StudentGroup> findAll();
+    List<StudentGroupDtoResponse> findAll();
 
     @Override
-    StudentGroup findById(UUID id);
+    StudentGroupDtoResponse findById(UUID id);
 
-    ResponseEntity<StudentGroupDTOCreateResponse> create(StudentGroupDTOCreateRequest createRequest);
+    StudentGroupDtoResponse create(StudentGroupDto dto);
 }

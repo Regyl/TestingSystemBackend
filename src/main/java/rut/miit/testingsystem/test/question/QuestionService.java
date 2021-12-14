@@ -1,24 +1,17 @@
 package rut.miit.testingsystem.test.question;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import rut.miit.testingsystem.exception.QuestionNotFoundException;
-import rut.miit.testingsystem.test.TestService;
-import rut.miit.testingsystem.test.question.dto.request.QuestionDTOCreateRequest;
 
 import java.util.List;
 import java.util.UUID;
 
 @Service
 public class QuestionService {
-    final QuestionRepository repository;
+    private final QuestionRepository repository;
+
     public QuestionService(QuestionRepository repository) {
         this.repository=repository;
-    }
-    TestService testService;
-    @Autowired
-    public void setTestService(TestService testService) {
-        this.testService = testService;
     }
 
     public Question findById(UUID id) {
@@ -33,7 +26,11 @@ public class QuestionService {
         repository.deleteById(id);
     }
 
-    public Question create(QuestionDTOCreateRequest createRequest) {
-        return repository.save(new Question(createRequest, testService.findById(createRequest.getTestId())));
+    public Question save(Question question) {
+        return repository.save(question);
+    }
+
+    public List<Question> findAllByTest(UUID id) {
+        return repository.findAllByTestId(id);
     }
 }

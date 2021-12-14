@@ -1,4 +1,4 @@
-package rut.miit.testingsystem.configuration;
+package rut.miit.testingsystem.configuration.beans;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

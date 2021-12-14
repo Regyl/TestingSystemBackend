@@ -8,7 +8,7 @@ import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
-public class StudentDTOCreateRequest {
+public class StudentDto {
     @NotNull
     private String firstName;
 

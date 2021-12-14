@@ -1,21 +1,25 @@
-version: '3.2'
+version: '3.7'
+
 services:
-  postgres:
-    restart: always
-    container_name: habr-pg-13.3
-    image: postgres:13.3
-    ports:
-      - '5432:5432'
+  app:
+    image: 'regyl/testing-system:latest'
+    build:
+      context: .
+    container_name: app
+    depends_on:
+      - db
     environment:
-      - POSTGRES_PASSWORD=pgpwd4habr
-      - POSTGRES_USER=habrpguser
-      - POSTGRES_DB=habrdb
-  # APP**
-  web:
-    build: .
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/habrdb
-    expose:
-      - 8080
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/testingsystem
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=SomeUselessPassword02
+      - SERVER_PORT=8090
     ports:
-      - 8080:8080
+      - '8090:8090'
+
+  db:
+    image: 'postgres:13.1-alpine'
+    container_name: db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=SomeUselessPassword02
+      - POSTGRES_DB=testingsystem
