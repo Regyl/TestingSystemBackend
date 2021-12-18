@@ -21,15 +21,16 @@ import rut.miit.testingsystem.auth.authority.Authorities;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebMvcConfigurer {
 
+    private static final String ADMIN = Authorities.Administrator.toString();
+    private static final String PROFESSOR = Authorities.Professor.toString();
+    private static final String STUDENT = Authorities.Student.toString();
+
     private final UserDetailsService userDetailsService;
     private final PasswordEncoder encoder;
     private final AuthenticationSuccessHandler authenticationSuccessHandler;
     private final AuthenticationFailureHandler authenticationFailureHandler;
     private final LogoutSuccessHandler logoutSuccessHandler;
 
-    private static final String ADMIN = Authorities.Administrator.toString();
-    private static final String PROFESSOR = Authorities.Professor.toString();
-    private static final String STUDENT = Authorities.Student.toString();
 
     public SecurityConfig(
             UserDetailsService userDetailsService, PasswordEncoder encoder, AuthenticationSuccessHandler authenticationSuccessHandler,
