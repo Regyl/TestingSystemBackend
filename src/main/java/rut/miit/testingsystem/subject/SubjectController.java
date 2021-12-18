@@ -1,5 +1,6 @@
 package rut.miit.testingsystem.subject;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +30,7 @@ public class SubjectController implements ISubjectController {
     }
 
     @GetMapping("/")
+    @Operation(summary = "Get all subjects")
     public List<SubjectDtoResponse> findAll() {
         return service.findAll().stream()
                 .map(mapper::toDto)
@@ -36,12 +38,14 @@ public class SubjectController implements ISubjectController {
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Get subject by id")
     public SubjectDtoResponse findById(@PathVariable UUID id) {
         Subject subject = service.findById(id);
         return mapper.toDto(subject);
     }
 
     @GetMapping("/faculties")
+    @Operation(summary = "Get all subjects by specified faculty")
     public List<SubjectDtoResponse> findByFaculty(@RequestParam Faculty faculty) {
         return service.findByFaculty(faculty).stream()
                 .map(mapper::toDto)
@@ -49,19 +53,22 @@ public class SubjectController implements ISubjectController {
     }
 
     @DeleteMapping("/{id}")
+    @Operation(summary = "Delete subject by id")
     public void deleteById(@PathVariable UUID id) {
         service.deleteById(id);
     }
 
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
-    public SubjectDtoResponse create(@RequestBody @Valid SubjectDto createRequest) {
-        Subject subject = mapper.toEntity(createRequest);
+    @Operation(summary = "Create new subject")
+    public SubjectDtoResponse create(@RequestBody @Valid SubjectDto dto) {
+        Subject subject = mapper.toEntity(dto);
         subject = service.create(subject);
         return mapper.toDto(subject);
     }
 
     @GetMapping("/faculties/")
+    @Operation
     public List<FacultyDtoResponse> getFaculties() {
         return Faculty.stream().
                 map(FacultyDtoResponse::of)

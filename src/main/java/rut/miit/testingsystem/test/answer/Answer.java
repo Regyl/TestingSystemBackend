@@ -11,7 +11,6 @@ import java.util.UUID;
 
 @Entity
 @Data
-@NoArgsConstructor
 public class Answer {
     @Id
     @GeneratedValue
@@ -28,11 +27,4 @@ public class Answer {
     @NotNull
     @Column(columnDefinition = "TEXT")
     private String text;
-
-
-    public Answer(AnswerDto createRequest, Question question) {
-        this.question=question;
-        this.isCorrect=createRequest.getIsCorrect();
-        this.text=createRequest.getText();
-    }
 }

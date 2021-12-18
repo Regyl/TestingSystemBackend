@@ -7,7 +7,6 @@ import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 @Data
-@NoArgsConstructor
 public class QuestionDto {
     @NotNull
     private String text;
