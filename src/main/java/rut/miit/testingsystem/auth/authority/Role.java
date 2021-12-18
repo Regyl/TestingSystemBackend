@@ -16,9 +16,7 @@ import java.util.Set;
 @NoArgsConstructor
 public class Role implements GrantedAuthority {
     @Id
-    @Column
     @Enumerated(EnumType.STRING)
-    @NotNull
     private Authorities authority;
 
     @Transient
@@ -29,6 +27,7 @@ public class Role implements GrantedAuthority {
         this.authority= userDTORegisterRequest.getAuthority();
     }
 
+    @Override
     public String getAuthority() {
         return authority.toString();
     }
