@@ -16,19 +16,18 @@ import java.util.Set;
 @NoArgsConstructor
 public class Role implements GrantedAuthority {
     @Id
-    @Column
     @Enumerated(EnumType.STRING)
-    @NotNull
     private Authorities authority;
 
     @Transient
     @ManyToMany(mappedBy = "authorities")
     private Set<User> users;
 
-    public Role(UserDto userDTORegisterRequest) {
-        this.authority= userDTORegisterRequest.getAuthority();
+    public Role(Authorities authority) {
+        this.authority= authority;
     }
 
+    @Override
     public String getAuthority() {
         return authority.toString();
     }

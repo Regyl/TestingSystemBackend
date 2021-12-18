@@ -3,6 +3,7 @@ package rut.miit.testingsystem.auth;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import rut.miit.testingsystem.auth.user.User;
 import rut.miit.testingsystem.auth.user.UserRepository;
@@ -13,9 +14,11 @@ import rut.miit.testingsystem.exception.UserAlreadyExistsException;
 public class AuthService implements UserDetailsService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public AuthService(UserRepository userRepository) {
+    public AuthService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -30,6 +33,7 @@ public class AuthService implements UserDetailsService {
     public void saveUser(UserDto registerRequest) {
         if(isExists(registerRequest.getLogin()))
             throw new UserAlreadyExistsException();
-        userRepository.save(new User(registerRequest));
+        User user = new User(registerRequest, passwordEncoder.encode(registerRequest.getPassword()));
+        userRepository.save(user);
     }
 }

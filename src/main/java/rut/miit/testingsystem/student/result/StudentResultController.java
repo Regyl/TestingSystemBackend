@@ -27,6 +27,7 @@ public class StudentResultController implements IStudentResultController {
     }
 
     @GetMapping("/")
+    @Operation(summary = "Get all results")
     public List<StudentResultDtoResponse> findAll() {
         return service.findAll().stream()
                 .map(mapper::toDto)
@@ -34,12 +35,14 @@ public class StudentResultController implements IStudentResultController {
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Get result by it's id")
     public StudentResultDtoResponse findById(@PathVariable UUID id) {
         StudentResult result = service.findById(id);
         return mapper.toDto(result);
     }
 
     @DeleteMapping("/{id}")
+    @Operation(summary = "Delete result by it's id")
     public void deleteById(@PathVariable UUID id) {
         service.deleteById(id);
     }

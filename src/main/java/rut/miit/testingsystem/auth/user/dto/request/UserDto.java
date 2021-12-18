@@ -7,7 +7,6 @@ import rut.miit.testingsystem.auth.authority.Authorities;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 
-@NoArgsConstructor
 @Data
 public class UserDto {
     @NotEmpty

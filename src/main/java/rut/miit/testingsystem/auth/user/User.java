@@ -39,10 +39,10 @@ public class User implements UserDetails {
     @ManyToMany(fetch = FetchType.EAGER) //Если ставить lazy падает с LazyInitializationException
     private Set<Role> authorities = new HashSet<>(3);
 
-    public User(UserDto userDTORegisterRequest) {
+    public User(UserDto userDTORegisterRequest, String password) {
         this.username= userDTORegisterRequest.getLogin();
-        this.password= new BCryptPasswordEncoder().encode(userDTORegisterRequest.getPassword());
-        this.authorities.add(new Role(userDTORegisterRequest));
+        this.password= password;
+        this.authorities.add(new Role(userDTORegisterRequest.getAuthority()));
     }
 
     public boolean isAccountNonExpired() {
