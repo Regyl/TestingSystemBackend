@@ -28,6 +28,7 @@ public class StudentController implements IStudentController {
     }
 
     @GetMapping("/")
+    @Operation(summary = "Get all students")
     public List<StudentDtoResponse> findAll() {
         return service.findAll().stream()
                 .map(mapper::toDto)
@@ -35,6 +36,7 @@ public class StudentController implements IStudentController {
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Get student by id")
     public StudentDtoResponse findById(@PathVariable UUID id) {
         Student student = service.findById(id);
         return mapper.toDto(student);
@@ -42,6 +44,7 @@ public class StudentController implements IStudentController {
 
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
+    @Operation(summary = "Create new student")
     public StudentDtoResponse create(@RequestBody @Valid StudentDto dto) {
         Student student = mapper.toEntity(dto);
         student = service.save(student);
@@ -55,6 +58,7 @@ public class StudentController implements IStudentController {
     }
 
     @DeleteMapping("/{id}")
+    @Operation(summary = "Delete student by it's id")
     public void deleteById(@PathVariable UUID id) {
         service.deleteById(id);
     }
