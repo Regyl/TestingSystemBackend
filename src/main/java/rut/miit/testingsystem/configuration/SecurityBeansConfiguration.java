@@ -15,7 +15,7 @@ import rut.miit.testingsystem.configuration.beans.CustomLogoutSuccessHandler;
 public class SecurityBeansConfiguration {
 
     @Bean
-    protected PasswordEncoder encoder() {
+    public PasswordEncoder encoder() {
         return new BCryptPasswordEncoder(BCryptPasswordEncoder.BCryptVersion.$2B);
     }
 

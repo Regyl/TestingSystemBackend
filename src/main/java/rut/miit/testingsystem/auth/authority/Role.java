@@ -23,8 +23,8 @@ public class Role implements GrantedAuthority {
     @ManyToMany(mappedBy = "authorities")
     private Set<User> users;
 
-    public Role(UserDto userDTORegisterRequest) {
-        this.authority= userDTORegisterRequest.getAuthority();
+    public Role(Authorities authority) {
+        this.authority= authority;
     }
 
     @Override
