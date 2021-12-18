@@ -25,10 +25,6 @@ public class AnswerMapper {
         return answer;
     }
 
-    public AnswerDtoStudentResponse toStudentDto(Answer answer) {
-        return mapper.map(answer, AnswerDtoStudentResponse.class);
-    }
-
     public AnswerDtoResponse toDto(Answer answer) {
         return mapper.map(answer, AnswerDtoResponse.class);
     }
