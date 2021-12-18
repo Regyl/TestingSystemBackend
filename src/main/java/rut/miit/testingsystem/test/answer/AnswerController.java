@@ -1,5 +1,6 @@
 package rut.miit.testingsystem.test.answer;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -26,12 +27,14 @@ public class AnswerController implements IAnswerController {
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Get answer by it's id")
     public AnswerDtoResponse findById(@PathVariable UUID id) {
         Answer answer = service.findById(id);
         return mapper.toDto(answer);
     }
 
     @GetMapping("/")
+    @Operation(summary = "Get all answers")
     public List<AnswerDtoResponse> findAll() {
         return service.findAll().stream()
                 .map(mapper::toDto)
@@ -39,12 +42,14 @@ public class AnswerController implements IAnswerController {
     }
 
     @DeleteMapping("/{id}")
+    @Operation(summary = "Delete answer by id")
     public void deleteById(@PathVariable UUID id) {
         service.deleteById(id);
     }
 
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
+    @Operation(summary = "Create new answer")
     public AnswerDtoResponse create(@RequestBody @Valid AnswerDto dto) {
         Answer answer = mapper.toEntity(dto);
         answer = service.save(answer);
@@ -52,6 +57,7 @@ public class AnswerController implements IAnswerController {
     }
 
     @GetMapping("/question")
+    @Operation(summary = "Get answers by specified question")
     public List<AnswerDtoResponse> findByQuestion(@RequestParam UUID id) {
         return service.findByQuestion(id).stream()
                 .map(mapper::toDto)

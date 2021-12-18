@@ -28,6 +28,7 @@ public class QuestionController implements IQuestionController {
     }
 
     @GetMapping("/")
+    @Operation(summary = "Get all questions")
     public List<QuestionDtoResponse> findAll() {
         return service.findAll().stream()
                 .map(mapper::toDto)
@@ -35,18 +36,21 @@ public class QuestionController implements IQuestionController {
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Get question by id")
     public QuestionDtoResponse findById(@PathVariable UUID id) {
         Question question = service.findById(id);
         return mapper.toDto(question);
     }
 
     @DeleteMapping("/{id}")
+    @Operation(summary = "Delete question by id")
     public void deleteById(@PathVariable UUID id) {
         service.deleteById(id);
     }
 
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
+    @Operation(summary = "Create new question")
     public QuestionDtoResponse create(@RequestBody @Valid QuestionDto dto) {
         Question question = mapper.toEntity(dto);
         question = service.save(question);
@@ -54,6 +58,7 @@ public class QuestionController implements IQuestionController {
     }
 
     @GetMapping("/test")
+    @Operation(summary = "Get questions by specified test")
     public List<QuestionDtoResponse> findByTest(@RequestParam UUID id) {
         return service.findAllByTest(id).stream()
                 .map(mapper::toDto)
