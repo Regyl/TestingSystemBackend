@@ -2,7 +2,7 @@ package rut.miit.testingsystem.service;
 
 import org.springframework.stereotype.Service;
 import rut.miit.testingsystem.entity.StudentGroup;
-import rut.miit.testingsystem.exception.StudentGroupNotFoundException;
+import rut.miit.testingsystem.exception.EntityNotFoundException;
 import rut.miit.testingsystem.repository.StudentGroupRepository;
 
 import java.util.List;
@@ -26,7 +26,8 @@ public class StudentGroupService {
     }
 
     public StudentGroup findById(UUID id) {
-        return repository.findById(id).orElseThrow(StudentGroupNotFoundException::new);
+        return repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(id, StudentGroup.class));
     }
 
     public void deleteById(UUID id) {

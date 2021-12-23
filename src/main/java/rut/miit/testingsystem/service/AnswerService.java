@@ -2,7 +2,7 @@ package rut.miit.testingsystem.service;
 
 import org.springframework.stereotype.Service;
 import rut.miit.testingsystem.entity.Answer;
-import rut.miit.testingsystem.exception.AnswerNotFoundException;
+import rut.miit.testingsystem.exception.EntityNotFoundException;
 import rut.miit.testingsystem.repository.AnswerRepository;
 
 import java.util.List;
@@ -19,7 +19,8 @@ public class AnswerService {
     }
 
     public Answer findById(UUID id) {
-        return repository.findById(id).orElseThrow(AnswerNotFoundException::new);
+        return repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(id, Answer.class));
     }
 
     public List<Answer> findAll() {
@@ -42,6 +43,7 @@ public class AnswerService {
         return repository.findAllById(answerIds);
     }
 
+    //Counting result of test
     public double getResult(List<UUID> answerIds) {
         List<Answer> answers = findAllByIds(answerIds);
         answers = answers.stream().filter(Answer::getIsCorrect).collect(Collectors.toList());

@@ -4,7 +4,6 @@ import org.springframework.stereotype.Service;
 import rut.miit.testingsystem.entity.Student;
 import rut.miit.testingsystem.entity.User;
 import rut.miit.testingsystem.exception.EntityNotFoundException;
-import rut.miit.testingsystem.exception.StudentNotFoundException;
 import rut.miit.testingsystem.repository.StudentRepository;
 import rut.miit.testingsystem.api.controller.dto.request.request.StudentDtoGroupUpdateRequest;
 
@@ -27,7 +26,8 @@ public class StudentService {
     }
 
     public Student findById(UUID id) {
-        return repository.findById(id).orElseThrow(StudentNotFoundException::new);
+        return repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(id, Student.class));
     }
 
     public Student save(Student student) {

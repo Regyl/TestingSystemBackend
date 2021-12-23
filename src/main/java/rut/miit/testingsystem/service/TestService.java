@@ -1,7 +1,7 @@
 package rut.miit.testingsystem.service;
 
 import org.springframework.stereotype.Service;
-import rut.miit.testingsystem.exception.TestNotFoundException;
+import rut.miit.testingsystem.exception.EntityNotFoundException;
 import rut.miit.testingsystem.repository.TestRepository;
 import rut.miit.testingsystem.entity.Test;
 
@@ -10,12 +10,12 @@ import java.util.UUID;
 
 @Service
 public class TestService {
+
     private final TestRepository repository;
 
     public TestService(TestRepository repository) {
         this.repository=repository;
     }
-
 
     public List<Test> findAllBySubject(UUID subjectId) {
         return repository.findAllBySubjectId(subjectId);
@@ -34,6 +34,7 @@ public class TestService {
     }
 
     public Test findById(UUID id) {
-        return repository.findById(id).orElseThrow(TestNotFoundException::new);
+        return repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(id, Test.class));
     }
 }

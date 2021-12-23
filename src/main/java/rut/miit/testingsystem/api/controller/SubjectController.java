@@ -66,7 +66,7 @@ public class SubjectController implements ISubjectController {
     @Operation(summary = "Create new subject")
     public SubjectDtoResponse create(@RequestBody @Valid SubjectDto dto) {
         Subject subject = mapper.toEntity(dto);
-        subject = service.create(subject);
+        subject = service.save(subject);
         return mapper.toDto(subject);
     }
 
