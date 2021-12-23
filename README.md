@@ -1,6 +1,7 @@
 ### Реализованная функциональность
 - Регистрация/авторизация
 - CRUD API для всех сущностей
+- Прохождение тестов
 
 ### Стек технологий
 - Git, Docker
@@ -32,5 +33,5 @@ docker run regyl/testing-system:latest
 Далее переходим в папку с файлом docker-compose
 
 ````
-docker-compose up
+docker-compose up -d
 ````
