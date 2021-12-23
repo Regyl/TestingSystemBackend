@@ -2,11 +2,10 @@ package rut.miit.testingsystem.integration;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.web.servlet.MvcResult;
-import rut.miit.testingsystem.student.dto.request.StudentDto;
-import rut.miit.testingsystem.student.dto.response.StudentDtoResponse;
+import rut.miit.testingsystem.api.controller.dto.request.request.StudentDto;
+import rut.miit.testingsystem.api.controller.dto.response.response.StudentDtoResponse;
 
 import java.util.List;
 
