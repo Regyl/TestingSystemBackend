@@ -1,17 +1,12 @@
 package rut.miit.testingsystem.integration;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.jboss.logging.Logger;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.test.context.support.WithUserDetails;
-import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-import rut.miit.testingsystem.subject.dto.request.SubjectDto;
-import rut.miit.testingsystem.subject.dto.response.SubjectDtoResponse;
+import rut.miit.testingsystem.api.controller.dto.request.SubjectDto;
+import rut.miit.testingsystem.api.controller.dto.response.SubjectDtoResponse;
 
 import java.util.List;
 

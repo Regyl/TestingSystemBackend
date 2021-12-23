@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import org.junit.jupiter.api.Test;
 import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.web.servlet.MvcResult;
-import rut.miit.testingsystem.test.answer.dto.response.AnswerDtoResponse;
+import rut.miit.testingsystem.api.controller.dto.response.AnswerDtoResponse;
 
 import java.util.List;
 
